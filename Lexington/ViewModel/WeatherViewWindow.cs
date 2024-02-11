@@ -1,10 +1,11 @@
-﻿using Lexington.View;
+﻿using Lexington.BaseClass;
+using Lexington.View;
 using System.Windows;
 
 namespace Lexington.ViewModel
 {
     //刚学不知道，现在懒得重构了
-    internal class WeatherViewWindow:NotifyPropertyChanged
+    internal class WeatherViewWindow : NotifyPropertyChanged
     {
         private WeatherWindow _weatherWindow;
         public string FirstDate
@@ -271,7 +272,7 @@ namespace Lexington.ViewModel
         {
             Style Cloudy = (Style)Application.Current.Resources["Cloudy"];
             Style Sunny = (Style)Application.Current.Resources["Sunny"];
-            if(we.Contains("雨")|| we.Contains("阴"))
+            if (we.Contains("雨") || we.Contains("阴"))
             {
                 return Cloudy;
             }

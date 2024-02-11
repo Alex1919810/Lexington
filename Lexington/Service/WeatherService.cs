@@ -1,25 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml;
-using IPTools.Core;
+﻿using IPTools.Core;
 using Lexington.Tools;
+using System.Xml;
 
-namespace Lexington.ViewModel
+namespace Lexington.Service
 {
     public class WeatherService
     {
         private string City = string.Empty;
         private string CityCode = string.Empty;
 
-        public WeatherService() 
+        public WeatherService()
         {
             GetPoint();
             //GetCityCode();
@@ -43,15 +33,16 @@ namespace Lexington.ViewModel
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load("/Lexington;component/Resource/Files/CityCode.xml");
             XmlNodeList Citys = xmlDoc.GetElementsByTagName("root");
-            CityCode = City==string.Empty?string.Empty: Citys[0].SelectSingleNode(City).InnerText;
+            CityCode = City == string.Empty ? string.Empty : Citys[0].SelectSingleNode(City).InnerText;
         }
 
         public void GetWeather()
         {
             List<string> Notes = new List<string>();
             string we = string.Empty;
-            string path = "/Lexington;component/Resource/Files/Weather/"+ DateTime.Now.ToString("yyyy-MM-dd");
-            if(FilesTool.IsFileVaild(path))
+            string path = FilesTool.FilePathCombine("Weather/",0) + DateTime.Now.ToString("yyyy-MM-dd") + ".xml";
+
+            if (FilesTool.IsFileVaild(path))
             {
                 we = FilesTool.XmlToString(path);
             }
@@ -60,7 +51,7 @@ namespace Lexington.ViewModel
                 string para = "theCityCode=" + City + "&theUserID= ";
                 we = HttpRequest.SendGet("http://ws.webxml.com.cn/WebServices/WeatherWS.asmx/getWeather", para);
                 FilesTool.SaveWeather(we);
-                
+
             }
             Notes = FilesTool.ParseWeather(we);
             if (Notes.Count == 1)
@@ -69,13 +60,13 @@ namespace Lexington.ViewModel
                 return;
             }
             string[] WeatherToday = Notes[4].Split("；");
-            string Note = "提督，这是今天" + City + "的天气\n\n"+
-                            WeatherToday[0] + "\n"+
-                            WeatherToday[1]+"\n"+
-                            WeatherToday[2]+"\n"+
+            string Note = "提督，这是今天" + City + "的天气\n\n" +
+                            WeatherToday[0] + "\n" +
+                            WeatherToday[1] + "\n" +
+                            WeatherToday[2] + "\n" +
                             Notes[5];
             GlobalValue.FiveDaysWeather[0].WeatherNote = Note;
-            for (int i = 0;i<5;i++)
+            for (int i = 0; i < 5; i++)
             {
                 string[] weather = Notes[7 + i * 5].Split(" ");
                 GlobalValue.FiveDaysWeather[i].Date = weather[0];

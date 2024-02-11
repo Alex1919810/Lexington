@@ -7,14 +7,14 @@ namespace Lexington.Tools
         public static int CountActiveMatter()
         {
             int count = 0;
-            for (int i=0;i<GlobalValue.Matters.Count;i++)
+            for (int i = 0; i < GlobalValue.Matters.Count; i++)
             {
                 var matter = GlobalValue.Matters[i];
-                if(matter.IsRunning == false) continue;
+                if (matter.IsRunning == false) continue;
                 if (DateTime.Now >= matter.EndTime)
                 {
-                    PushMesToQue(0,i);
-                    if(matter.IsRedo)
+                    PushMesToQue(0, i);
+                    if (matter.IsRedo)
                     {
                         var currentTime = DateTime.Now.AddSeconds(-DateTime.Now.Second);
                         TimeSpan tmpTime = matter.EndTime.Value - matter.StartTime.Value;
@@ -27,14 +27,14 @@ namespace Lexington.Tools
                     {
                         matter.IsRunning = false;
                         matter.Process = 100;
-                    }                   
+                    }
                 }
                 if (matter.IsRunning == true) count++;
             }
             return count;
         }
 
-        public static double CalculateProcess(DateTime? StartTime,DateTime? EndTime)
+        public static double CalculateProcess(DateTime? StartTime, DateTime? EndTime)
         {
             double process = 0;
             TimeSpan totalTimeRange = EndTime.Value - StartTime.Value;
@@ -47,7 +47,7 @@ namespace Lexington.Tools
         {
             string s = string.Empty;
             ResoureCount resoureCount = FilesTool.ParseExpeditionResource(matter.MatterName);
-            if(DateTime.Now.Day == matter.EndTime.Value.Day)
+            if (DateTime.Now.Day == matter.EndTime.Value.Day)
             {
                 GlobalValue.ResourceGetTotal += resoureCount;
                 s += "司令官,远征" + matter.MatterName + string.Format("任务结束了,今天我们至少收获了{0}燃油,{1}弹药,{2}钢铁,{3}铝材,{4}个快修,{5}个快建,{6}张舰船图纸,{7}张装备图纸。",
@@ -58,7 +58,7 @@ namespace Lexington.Tools
             {
                 s += "司令官,远征" + matter.MatterName + "任务在" + matter.EndTime.Value.Day + "号已经结束了，有好好记得收远征吗？";
             }
-            
+
             return s;
         }
 
@@ -67,7 +67,7 @@ namespace Lexington.Tools
             string s = string.Empty;
             if (DateTime.Now.Day == matter.EndTime.Value.Day)
             {
-                s += "司令官,任务" + matter.MatterName +"的提醒时间到了，请不要忘记了。";
+                s += "司令官,任务" + matter.MatterName + "的提醒时间到了，请不要忘记了。";
             }
             else
             {
@@ -77,7 +77,7 @@ namespace Lexington.Tools
             return s;
         }
 
-        public static void PushMesToQue(int Type = 0,int Index = 0)
+        public static void PushMesToQue(int Type = 0, int Index = 0)
         {
             GlobalValue.MesQue.Enqueue(new GlobalValue.Mes { type = Type, index = Index });
             GlobalValue.MesSemaphore.Release();

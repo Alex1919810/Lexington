@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Lexington.Model
+﻿namespace Lexington.Model
 {
-    public class Expedition: ResoureCount
+    public class Expedition : ResoureCount
     {
         public string ExpeditionId { get; set; } = string.Empty;
 

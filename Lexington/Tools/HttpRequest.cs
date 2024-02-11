@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
+﻿using System.IO;
 using System.Net;
-using System.Security.Policy;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Lexington.Tools
@@ -205,7 +201,7 @@ namespace Lexington.Tools
             return result;
         }
 
-     
+
         /// <summary>
         /// 获取页面html
         /// </summary>

@@ -1,6 +1,7 @@
-﻿using Lexington.Model;
-using Lexington.View;
+﻿using Lexington.BaseClass;
 using Lexington.Command;
+using Lexington.Model;
+using Lexington.View;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -10,7 +11,7 @@ namespace Lexington.ViewModel
     {
 
 
-        public ICommand AddMatter {  get; set; }
+        public ICommand AddMatter { get; set; }
 
         public ICommand ChangeMatter { get; set; }
 
@@ -36,9 +37,9 @@ namespace Lexington.ViewModel
         public ClockViewWindow()
         {
 
-            AddMatter = new RelayCommand(param => MatterAdd());
-            ChangeMatter = new RelayCommand(param => MatterChange(param));
-            DeleteMatter = new RelayCommand(param => MatterDelete(param));
+            AddMatter = new RelayCommand<object>(param => MatterAdd());
+            ChangeMatter = new RelayCommand<object>(param => MatterChange(param));
+            DeleteMatter = new RelayCommand<object>(param => MatterDelete(param));
 
 
 
@@ -58,7 +59,7 @@ namespace Lexington.ViewModel
             if (GlobalValue.ActiveMatter == 0) GlobalValue.MatterSemaphore.Release();
             GlobalValue.ActiveMatter++;
             GlobalValue.MatterChangeSemaphore.Release();
-         
+
             AddMatterWindow childWindow = (AddMatterWindow)sender;
             childWindow.ReturnValueUpdated -= ChildWindow_AddMatter;
         }
@@ -85,7 +86,7 @@ namespace Lexington.ViewModel
                 if (GlobalValue.ActiveMatter == 0) GlobalValue.MatterSemaphore.Release();
                 GlobalValue.ActiveMatter++;
             }
-            Matters[TmpIndex] = e;         
+            Matters[TmpIndex] = e;
 
             GlobalValue.MatterChangeSemaphore.Release();
 

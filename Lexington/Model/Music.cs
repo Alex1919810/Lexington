@@ -1,4 +1,4 @@
-﻿using Lexington.ViewModel;
+﻿using Lexington.BaseClass;
 
 namespace Lexington.Model
 {
@@ -8,7 +8,7 @@ namespace Lexington.Model
 
         private double _MusicProcess = 0.0;
 
-        private double _MusicTime =0.0;
+        private double _MusicTime = 0.0;
 
         public string MusicName
         {
@@ -49,7 +49,7 @@ namespace Lexington.Model
             }
         }
 
-        public Music(string Name ,double Time)
+        public Music(string Name, double Time)
         {
             _MusicName = Name;
             _MusicProcess = 0;

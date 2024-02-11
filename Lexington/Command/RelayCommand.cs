@@ -2,7 +2,7 @@
 
 namespace Lexington.Command
 {
-    internal class RelayCommand : ICommand
+    internal class RelayCommand <T> : ICommand
     {
         //private readonly Action _Execute;
         //private readonly Func<bool> _CanExecute;
@@ -30,10 +30,10 @@ namespace Lexington.Command
         //    _Execute();
         //}
 
-        private readonly Action<object> _execute;
-        private readonly Func<object, bool> _canExecute;
+        private readonly Action<T> _execute;
+        private readonly Func<T, bool> _canExecute;
 
-        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
+        public RelayCommand(Action<T> execute, Func<T, bool> canExecute = null)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
@@ -47,12 +47,12 @@ namespace Lexington.Command
 
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null || _canExecute(parameter);
+            return _canExecute == null || _canExecute((T)parameter);
         }
 
         public void Execute(object parameter)
         {
-            _execute(parameter);
+            _execute((T)parameter);
         }
     }
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Lexington.Model
+﻿namespace Lexington.Model
 {
     public class ResoureCount
     {
@@ -16,13 +10,13 @@ namespace Lexington.Model
 
         public int Aluminium { get; set; } = 0;
 
-        public int QuickConstruction {  get; set; } = 0;
+        public int QuickConstruction { get; set; } = 0;
 
         public int RapidRepair { get; set; } = 0;
         public int ShipBlueprint { get; set; } = 0;
         public int EquipmentBlueprint { get; set; } = 0;
 
-        private ResoureCount(int oil, int munition, int steel, int aluminium, int quickConstruction, int rapidRepair,int shipBlueprint,int equipmentBlueprint)
+        private ResoureCount(int oil, int munition, int steel, int aluminium, int quickConstruction, int rapidRepair, int shipBlueprint, int equipmentBlueprint)
         {
             Oil = oil;
             Munition = munition;

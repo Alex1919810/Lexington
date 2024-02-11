@@ -1,12 +1,13 @@
-﻿using Lexington.Model;
+﻿using Lexington.BaseClass;
+using Lexington.Command;
+using Lexington.Model;
 using Lexington.Tools;
 using Lexington.View;
-using Lexington.Command;
 using System.Windows.Input;
 
 namespace Lexington.ViewModel
 {
-    internal class MemoViewWindow:NotifyPropertyChanged
+    internal class MemoViewWindow : NotifyPropertyChanged
     {
         private MemoWindow _MemoWindow;
 
@@ -38,7 +39,7 @@ namespace Lexington.ViewModel
             _MemoText = new MemoText();
             Memo = FilesTool.DeserializeFromXml<MemoText>(FilePath);
 
-            SaveText = new RelayCommand(param=>TextSave());
+            SaveText = new RelayCommand<object>(param => TextSave());
         }
 
 

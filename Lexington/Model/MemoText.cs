@@ -1,23 +1,19 @@
-﻿using Lexington.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Lexington.BaseClass;
 
 namespace Lexington.Model
 {
-    public class MemoText: NotifyPropertyChanged
+    public class MemoText : NotifyPropertyChanged
     {
         private string _Text { get; set; } = string.Empty;
 
         private string _SaveTime { get; set; } = string.Empty;
 
-        public string SaveTime {
+        public string SaveTime
+        {
             get { return _SaveTime; }
             set
             {
-                if (_SaveTime!= value)
+                if (_SaveTime != value)
                 {
                     _SaveTime = value;
                     OnPropertyChanged(nameof(SaveTime));

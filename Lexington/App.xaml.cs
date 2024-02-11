@@ -1,8 +1,5 @@
 ﻿using Lexington.Model;
 using Lexington.Tools;
-using System.Configuration;
-using System.Data;
-using System.Threading;
 using System.Windows;
 
 namespace Lexington
@@ -24,7 +21,7 @@ namespace Lexington
 
         private void CurrentDomain_ProcessExit(object sender, EventArgs e)
         {
-            string path = Tools.FilesTool.FilePathCombine("ClockMatters.xml",0);
+            string path = Tools.FilesTool.FilePathCombine("ClockMatters.xml", 0);
             Tools.FilesTool.SerializeCollectionToXml<Matter>(GlobalValue.Matters, path);
         }
 
@@ -44,18 +41,19 @@ namespace Lexington
                     {
                         if (matter.IsRunning == true)
                         {
-                            matter.Process = DataTool.CalculateProcess(startTime,endTime);
+                            matter.Process = DataTool.CalculateProcess(startTime, endTime);
                             if (currentTime >= endTime)
                             {
                                 DataTool.PushMesToQue(0, i);
-                                if(matter.IsRedo)
+                                if (matter.IsRedo)
                                 {
                                     currentTime = currentTime.AddSeconds(-currentTime.Second);
                                     TimeSpan tmpTime = endTime.Value - startTime.Value;
                                     matter.StartTime = currentTime;
-                                    matter.EndTime = currentTime+tmpTime;
+                                    matter.EndTime = currentTime + tmpTime;
                                     matter.Process = 0;
-                                    matter.IsRunning = true;                                }
+                                    matter.IsRunning = true;
+                                }
                                 else
                                 {
                                     matter.IsRunning = false;

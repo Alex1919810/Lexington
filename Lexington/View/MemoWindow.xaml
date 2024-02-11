@@ -2,21 +2,47 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Lexington.View"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Lexington.View" xmlns:viewmodel="clr-namespace:Lexington.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MemoViewWindow}"
-        mc:Ignorable="d"
-        WindowStyle="SingleBorderWindow"
-        Topmost="True"
+        xmlns:viewmodel="clr-namespace:Lexington.ViewModel"
+        Title="备忘录"
+        Width="230"
+        Height="200"
+        d:DataContext="{d:DesignInstance Type=viewmodel:MemoViewWindow}"
         Closing="Window_Closing"
-        Title="备忘录"  Height="200" Width="230">
+        Topmost="True"
+        WindowStyle="SingleBorderWindow"
+        mc:Ignorable="d">
 
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-            <Grid Background="White" Height="Auto">
-                <Image  Source="pack://siteoforigin:,,,/Resource/Images/Window/Tie.png" Opacity="0.25" Width="200" Height="800" Margin="0,-100,0,0"  />
-                <TextBox x:Name="MemoText" Background="Transparent"  BorderBrush="Transparent" Margin="0,30" Text="{Binding Path=Memo.Text}" TextWrapping="Wrap" AcceptsReturn="True"/>
-                <Label  Content="{Binding Path=Memo.SaveTime}" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Left"  Height="30" Width="148" Margin="0,-3,0,0"/>
-                <Button Content="保存" FontSize="10" HorizontalAlignment="Right"  VerticalAlignment="Top" Command="{Binding SaveText}" Style="{StaticResource PressButton}"/>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <Grid Height="Auto" Background="White">
+                <Image Width="200"
+                       Height="800"
+                       Margin="0,-100,0,0"
+                       Opacity="0.25"
+                       Source="pack://siteoforigin:,,,/Resource/Images/Window/Tie.png" />
+                <TextBox x:Name="MemoText"
+                         Margin="0,30"
+                         AcceptsReturn="True"
+                         Background="Transparent"
+                         BorderBrush="Transparent"
+                         Text="{Binding Path=Memo.Text}"
+                         TextWrapping="Wrap" />
+                <Label Width="148"
+                       Height="30"
+                       Margin="0,-3,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       HorizontalContentAlignment="Left"
+                       Content="{Binding Path=Memo.SaveTime}"
+                       FontSize="10" />
+                <Button HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Command="{Binding SaveText}"
+                        Content="保存"
+                        FontSize="10"
+                        Style="{StaticResource PressButton}" />
 
 
             </Grid>

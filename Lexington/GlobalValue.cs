@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Windows.Documents;
+﻿using Lexington.Model;
 using Lexington.Tools;
-using Lexington.Model;
 using System.Collections.ObjectModel;
 
 namespace Lexington
@@ -19,12 +12,12 @@ namespace Lexington
             public int index;
         }
 
-        public static List<List<string>> Wifes = new List<List<string>>() 
-        { 
-            new List<string> { "Lexington","Normal", "Remodel" , "WeddingDress", "BiKiNi", "Flower", "Red","Moon","Mia" } 
+        public static List<List<string>> Wifes = new List<List<string>>()
+        {
+            new List<string> { "Lexington","Normal", "Remodel" , "WeddingDress", "BiKiNi", "Flower", "Red","Moon","Mia" }
         };
 
-        public static string[] WifeStates = new string[2] { "Normal","Damage"};
+        public static string[] WifeStates = new string[2] { "Normal", "Damage" };
 
         public static string[] PicFormats = new string[2] { ".gif", ".png" };
 
@@ -34,8 +27,8 @@ namespace Lexington
 
         public static string m_IP = HttpRequest.GetIPFromHtml(HttpRequest.HttpGetPageHtml("http://www.net.cn/static/customercare/yourip.asp", "utf-8"));
 
-        public static Weather[] FiveDaysWeather= new Weather[5]
-        { 
+        public static Weather[] FiveDaysWeather = new Weather[5]
+        {
                 new Weather() {},
                 new Weather() {},
                 new Weather() {},
@@ -53,7 +46,7 @@ namespace Lexington
 
         public static int ActiveMatter = Tools.DataTool.CountActiveMatter();
 
-        public static SemaphoreSlim MatterChangeSemaphore = new SemaphoreSlim(1,1);
+        public static SemaphoreSlim MatterChangeSemaphore = new SemaphoreSlim(1, 1);
 
         public static SemaphoreSlim MatterSemaphore = new SemaphoreSlim(0);
 

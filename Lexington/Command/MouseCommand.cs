@@ -23,18 +23,18 @@ namespace Lexington.Command
             var args = (MouseEventArgs)parameter;
             if (args.LeftButton == MouseButtonState.Pressed)
             {
-                LeftMousePress?.Invoke(this, args);             
+                LeftMousePress?.Invoke(this, args);
             }
-            else if(args.LeftButton == MouseButtonState.Released)
+            else if (args.LeftButton == MouseButtonState.Released)
             {
                 LeftMouseRelease?.Invoke(this, args);
             }
-            else if(args.RightButton == MouseButtonState.Pressed)
+            else if (args.RightButton == MouseButtonState.Pressed)
             {
                 RightMousePress?.Invoke(this, args);
             }
-            else if(args.RightButton == MouseButtonState.Released)
-            { 
+            else if (args.RightButton == MouseButtonState.Released)
+            {
                 RightMouseRelease?.Invoke(this, args);
             }
         }

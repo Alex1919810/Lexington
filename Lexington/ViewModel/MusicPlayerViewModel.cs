@@ -1,15 +1,15 @@
-﻿using Lexington.Tools;
-using Lexington.Model;
+﻿using Lexington.BaseClass;
 using Lexington.Command;
-using System.Windows.Input;
+using Lexington.Model;
+using Lexington.Tools;
 using NAudio.Wave;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Threading;
-using Lexington.Inteface;
 
 namespace Lexington.ViewModel
 {
-    internal class MusicPlayerViewModel:NotifyPropertyChanged
+    internal class MusicPlayerViewModel : NotifyPropertyChanged
     {
         private WaveOutEvent WaveOutEvent;
 
@@ -32,7 +32,7 @@ namespace Lexington.ViewModel
             get { return _TimeStamp; }
             set
             {
-                if(_TimeStamp != value)
+                if (_TimeStamp != value)
                 {
                     _TimeStamp = value;
                     OnPropertyChanged(nameof(TimeStamp));
@@ -71,7 +71,7 @@ namespace Lexington.ViewModel
                 OnPropertyChanged(nameof(PlayPicUrl));
             }
         }
-        public ICommand PlayMusic {  get; set; }
+        public ICommand PlayMusic { get; set; }
 
         public ICommand SliderMouseDown { get; set; }
 
@@ -79,7 +79,7 @@ namespace Lexington.ViewModel
 
         public ICommand SliderValueChange { get; set; }
 
-        public MusicPlayerViewModel() 
+        public MusicPlayerViewModel()
         {
             InitializeAudio();
             InitializeData();
@@ -88,10 +88,10 @@ namespace Lexington.ViewModel
 
         private void InitializeCommand()
         {
-            PlayMusic = new RelayCommand(param => MusicClick());
-            SliderMouseDown = new RelayCommand(param => MouseDownSlider());
-            SliderMouseUp = new RelayCommand(param => MouseUpSlider());
-            SliderValueChange =new RelayCommand(param => ValueChangedSlider());
+            PlayMusic = new RelayCommand<object>(param => MusicClick());
+            SliderMouseDown = new RelayCommand<object>(param => MouseDownSlider());
+            SliderMouseUp = new RelayCommand<object>(param => MouseUpSlider());
+            SliderValueChange = new RelayCommand<object>(param => ValueChangedSlider());
         }
 
         private void InitializeData()
@@ -100,9 +100,9 @@ namespace Lexington.ViewModel
 
             Timer = new DispatcherTimer();
             Timer.Interval = TimeSpan.FromSeconds(1);
-            Timer.Tick += MusicProcess_Tick;    
-            
-            if(AudioFileReader!=null)
+            Timer.Tick += MusicProcess_Tick;
+
+            if (AudioFileReader != null)
             {
                 TimeStamp = "00:00/" + AudioFileReader.TotalTime.ToString(@"mm\:ss");
             }
@@ -116,7 +116,7 @@ namespace Lexington.ViewModel
         {
             string audioFilePath = FilesTool.FilePathCombine("Musics/test.mp3", 0);
 
-            string MusicName = "test"; 
+            string MusicName = "test";
             WaveOutEvent = new WaveOutEvent();
             AudioFileReader = new AudioFileReader(audioFilePath);
             WaveOutEvent.Init(AudioFileReader);
@@ -129,14 +129,14 @@ namespace Lexington.ViewModel
                 Timer.Stop();
             };
 
-            Music = new Music(MusicName,AudioFileReader.TotalTime.TotalSeconds);
+            Music = new Music(MusicName, AudioFileReader.TotalTime.TotalSeconds);
         }
 
         private async void MusicClick()
         {
             IsPlaying = !IsPlaying;
             PlayPicUrl = GetPicUrl();
-            await Task.Run(()=>TogglePlayPause());
+            await Task.Run(() => TogglePlayPause());
         }
 
         private void TogglePlayPause()
@@ -156,9 +156,9 @@ namespace Lexington.ViewModel
         private string GetPicUrl()
         {
             string s = string.Empty;
-            if(IsPlaying)
+            if (IsPlaying)
             {
-                s = FilesTool.FilePathCombine("Button/Pause.png",1);
+                s = FilesTool.FilePathCombine("Button/Pause.png", 1);
             }
             else
             {
@@ -169,7 +169,7 @@ namespace Lexington.ViewModel
 
         private void MusicProcess_Tick(object sender, EventArgs e)
         {
-            if(!IsSlider)
+            if (!IsSlider)
             {
                 Music.MusicProcess = AudioFileReader.CurrentTime.TotalSeconds;
                 TimeStamp = AudioFileReader.CurrentTime.ToString(@"mm\:ss") + "/" + AudioFileReader.TotalTime.ToString(@"mm\:ss");
@@ -178,7 +178,7 @@ namespace Lexington.ViewModel
 
         private void MouseDownSlider()
         {
-            IsSlider = true; 
+            IsSlider = true;
         }
 
         private void MouseUpSlider()
@@ -192,7 +192,7 @@ namespace Lexington.ViewModel
         {
             if (IsSlider)
             {
-                TimeStamp = TimeSpan.FromSeconds(Music.MusicProcess).ToString(@"mm\:ss") + "/" + AudioFileReader.TotalTime.ToString(@"mm\:ss");           
+                TimeStamp = TimeSpan.FromSeconds(Music.MusicProcess).ToString(@"mm\:ss") + "/" + AudioFileReader.TotalTime.ToString(@"mm\:ss");
             }
         }
 

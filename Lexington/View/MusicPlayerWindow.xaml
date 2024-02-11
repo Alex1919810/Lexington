@@ -2,21 +2,41 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Lexington.View"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        mc:Ignorable="d"
-        Style="{StaticResource stlWindow}"
-        Background="White"
-        Title="MusicPlayerWindow" Height="75" Width="300"
+        xmlns:local="clr-namespace:Lexington.View"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodel="clr-namespace:Lexington.ViewModel"
-        d:DataContext="{d:DesignInstance Type=viewmodel:MusicPlayerViewModel}">
+        Title="MusicPlayerWindow"
+        Width="300"
+        Height="75"
+        d:DataContext="{d:DesignInstance Type=viewmodel:MusicPlayerViewModel}"
+        Background="White"
+        Style="{StaticResource stlWindow}"
+        mc:Ignorable="d">
     <Grid>
-        <Label Content="{Binding Music.MusicName}" Width="auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="20,0,20,55"/>
-        <Button Content="x" FontSize="5" Width="10" Height="10" HorizontalAlignment="Left" Margin="290,0,0,65" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Label Width="auto"
+               Margin="20,0,20,55"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               Content="{Binding Music.MusicName}" />
+        <Button Width="10"
+                Height="10"
+                Margin="290,0,0,65"
+                HorizontalAlignment="Left"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Content="x"
+                FontSize="5" />
 
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Slider x:Name="progressSlider" Minimum="0" Maximum="{Binding Music.MusicTime}" Value="{Binding Music.MusicProcess}" Width="300" Margin="0,30,0,0">
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Vertical">
+            <Slider x:Name="progressSlider"
+                    Width="300"
+                    Margin="0,30,0,0"
+                    Maximum="{Binding Music.MusicTime}"
+                    Minimum="0"
+                    Value="{Binding Music.MusicProcess}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
                         <i:InvokeCommandAction Command="{Binding SliderMouseDown}" />
@@ -24,34 +44,53 @@
                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
                         <i:InvokeCommandAction Command="{Binding SliderMouseUp}" />
                     </i:EventTrigger>
-                    <i:EventTrigger EventName="ValueChanged" >
+                    <i:EventTrigger EventName="ValueChanged">
                         <i:InvokeCommandAction Command="{Binding SliderValueChange}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Slider>
-            <UniformGrid Columns="6" HorizontalAlignment="Center" Margin="0,5,0,0" Width="300">
-                <Slider  Minimum="0" Maximum="1" Value="0" Width="50"  />
-                <Button Height="20" Width="20" Style="{StaticResource PressButton}">
+            <UniformGrid Width="300"
+                         Margin="0,5,0,0"
+                         HorizontalAlignment="Center"
+                         Columns="6">
+                <Slider Width="50"
+                        Maximum="1"
+                        Minimum="0"
+                        Value="0" />
+                <Button Width="20"
+                        Height="20"
+                        Style="{StaticResource PressButton}">
                     <Button.Background>
-                        <ImageBrush ImageSource="pack://siteoforigin:,,,/Resource/Images/Button/List.png"/>
+                        <ImageBrush ImageSource="pack://siteoforigin:,,,/Resource/Images/Button/List.png" />
                     </Button.Background>
                 </Button>
-                <Button  Height="20" Width="20" Style="{StaticResource PressButton}">
+                <Button Width="20"
+                        Height="20"
+                        Style="{StaticResource PressButton}">
                     <Button.Background>
-                        <ImageBrush ImageSource="pack://siteoforigin:,,,/Resource/Images/Button/Last.png"/>
+                        <ImageBrush ImageSource="pack://siteoforigin:,,,/Resource/Images/Button/Last.png" />
                     </Button.Background>
                 </Button>
-                <Button   Height="20" Width="20" Style="{StaticResource PressButton}" Command="{Binding PlayMusic}">
+                <Button Width="20"
+                        Height="20"
+                        Command="{Binding PlayMusic}"
+                        Style="{StaticResource PressButton}">
                     <Button.Background>
-                        <ImageBrush ImageSource="{Binding PlayPicUrl}"/>
+                        <ImageBrush ImageSource="{Binding PlayPicUrl}" />
                     </Button.Background>
                 </Button>
-                <Button  Height="20" Width="20" Style="{StaticResource PressButton}" >
+                <Button Width="20"
+                        Height="20"
+                        Style="{StaticResource PressButton}">
                     <Button.Background>
-                        <ImageBrush ImageSource="pack://siteoforigin:,,,/Resource/Images/Button/Next.png"/>
+                        <ImageBrush ImageSource="pack://siteoforigin:,,,/Resource/Images/Button/Next.png" />
                     </Button.Background>
                 </Button>
-                <Label Content="{Binding TimeStamp}" FontSize="8" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="-5,0,0,0"/>
+                <Label Margin="-5,0,0,0"
+                       HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center"
+                       Content="{Binding TimeStamp}"
+                       FontSize="8" />
             </UniformGrid>
 
         </StackPanel>

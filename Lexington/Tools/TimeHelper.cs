@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Threading;
+﻿using System.Windows.Threading;
 
 namespace Lexington.Tools
 {
@@ -58,7 +52,7 @@ namespace Lexington.Tools
 
         private void Timer_Tick_Helper(object sender, EventArgs e)
         {
-            if(this.seconds > 0)
+            if (this.seconds > 0)
             {
                 this.seconds--;
             }
@@ -79,7 +73,7 @@ namespace Lexington.Tools
         }
 
         public void StopTimer()
-        { 
+        {
             timer.Stop();
         }
     }

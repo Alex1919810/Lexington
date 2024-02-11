@@ -1,12 +1,7 @@
 ﻿using Lexington.Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
@@ -140,11 +135,11 @@ namespace Lexington.Tools
             {
                 Expedition expedition = new Expedition();
                 expedition.ExpeditionName = element.Name.LocalName;
-                foreach(var attribute in element.Attributes())
+                foreach (var attribute in element.Attributes())
                 {
                     if (attribute != null)
                     {
-                        switch(attribute.Name.ToString())
+                        switch (attribute.Name.ToString())
                         {
                             case "编号":
                                 expedition.ExpeditionId = attribute.Value;
@@ -292,22 +287,22 @@ namespace Lexington.Tools
             }
         }
 
-        public static string FilePathCombine(string FileName,int Type)
+        public static string FilePathCombine(string FileName, int Type)
         {
-  
+
             string relativeFolderPath = "Resource";
-            switch(Type)
+            switch (Type)
             {
-                case 0: relativeFolderPath += "/Files/";break;
-                case 1: relativeFolderPath += "/Images/";break;
-                case 2: relativeFolderPath += "/Wifes/";break;
+                case 0: relativeFolderPath += "/Files/"; break;
+                case 1: relativeFolderPath += "/Images/"; break;
+                case 2: relativeFolderPath += "/Wifes/"; break;
             }
 
             // 获取程序集的位置
             string assemblyLocation = Assembly.GetExecutingAssembly().Location;
 
             // 构建文件夹的完整路径
-            string folderPath = Path.Combine(Path.GetDirectoryName(assemblyLocation), relativeFolderPath,FileName);
+            string folderPath = Path.Combine(Path.GetDirectoryName(assemblyLocation), relativeFolderPath, FileName);
             return folderPath;
         }
     }

@@ -2,95 +2,147 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Lexington"
         xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
-        xmlns:n="http://www.hardcodet.net/taskbar"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        mc:Ignorable="d"
+        xmlns:local="clr-namespace:Lexington"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:n="http://www.hardcodet.net/taskbar"
         xmlns:viewmodel="clr-namespace:Lexington.ViewModel"
+        Title="MainWindow"
+        Width="611"
+        Height="611"
         d:DataContext="{d:DesignInstance Type=viewmodel:MainViewWindow}"
-        Title="MainWindow" Height="611" Width="611"
-        PreviewMouseLeftButtonDown="Window_MouseLeftButtonDown"
-        PreviewMouseMove="Window_MouseMove"
-        PreviewMouseLeftButtonUp="Window_MouseLeftButtonUp"
-        Style="{StaticResource stlWindow}">
+        Style="{StaticResource stlWindow}"
+        mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+            <i:InvokeCommandAction Command="{Binding WindowMove_LeftMouseDown}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+            <i:InvokeCommandAction Command="{Binding WindowMove_LeftMouseUp}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="PreviewMouseMove">
+            <i:InvokeCommandAction Command="{Binding WindowMove_MouseMove}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid Cursor="">
-
-
-
-        <Image HorizontalAlignment="Left" Height="563" VerticalAlignment="Top" Width="563" gif:AnimationBehavior.SourceUri="{Binding PicSource}" gif:AnimationBehavior.RepeatBehavior="Forever" Margin="0,100,0,0"
-          MouseLeftButtonUp="Image_MouseLeftButtonUp" >
+        <Image Width="563"
+               Height="563"
+               Margin="0,100,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               gif:AnimationBehavior.RepeatBehavior="Forever"
+               gif:AnimationBehavior.SourceUri="{Binding WifeSer.PicSource}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonUp">
+                    <i:InvokeCommandAction Command="{Binding DialogTextDisplay}" CommandParameter="1" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <Image.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="打开/关闭天气预报" Command="{Binding GetReport}"/>
-                    <MenuItem Header="打开待办事项" Command="{Binding GetMatters}"/>
-                    <MenuItem Header="打开备忘录" Command="{Binding GetMemo}"/>
-                    <MenuItem Header="打开音乐播放器" Command="{Binding GetMusicPlayer}"/>
+                    <MenuItem Command="{Binding WindowSer.GetReport}" Header="打开/关闭天气预报" />
+                    <MenuItem Command="{Binding WindowSer.GetMatters}" Header="打开待办事项" />
+                    <MenuItem Command="{Binding WindowSer.GetMemo}" Header="打开备忘录" />
+                    <MenuItem Command="{Binding WindowSer.GetMusicPlayer}" Header="打开音乐播放器" />
                 </ContextMenu>
             </Image.ContextMenu>
-            <!--<i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseEnter">
-                    <i:InvokeCommandAction Command="{Binding ImageMouseEnterCommand}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>-->
         </Image>
 
-       
+
 
         <n:TaskbarIcon x:Name="taskbarIcon"
-                   IconSource="/Lexington;component/Resource/Images/Icon/Normal.ico"
-                   ToolTipText="太太乐"
-                   TrayMouseDoubleClick="Open_Click">
+                       IconSource="/Lexington;component/Resource/Images/Icon/Normal.ico"
+                       ToolTipText="太太乐"
+                       TrayMouseDoubleClick="Open_Click">
             <n:TaskbarIcon.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="打开" Click="Open_Click"/>
-                    <MenuItem Header="隐藏" Click="Hide_Click"/>
-                    <MenuItem Header="退出" Click="Exit_Click"/>
+                    <MenuItem Click="Open_Click" Header="打开" />
+                    <MenuItem Click="Hide_Click" Header="隐藏" />
+                    <MenuItem Click="Exit_Click" Header="退出" />
                 </ContextMenu>
             </n:TaskbarIcon.ContextMenu>
         </n:TaskbarIcon>
-        <!--<TextBox HorizontalAlignment="Left" Margin="261,431,0,0" TextWrapping="Wrap" Text="{Binding ChatText}" VerticalAlignment="Top" Width="350" Height="170" IsReadOnly="True" FontSize="30"/>-->
-        <!--<Image HorizontalAlignment="Left" Height="563" VerticalAlignment="Top" Width="563" Source="E:\VsProjects\Lexington\Lexington\Resource\Wifes\Lexington\Normal\Damage.gif" Margin="0,100,0,0" />-->
-        <Border Grid.Row="1"  x:Name="DialogBorder" BorderBrush="Black" BorderThickness="3" CornerRadius="5"  VerticalAlignment="Top"  Visibility="Hidden" Margin="261,410,0,0" >
-            <Grid >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="pack://siteoforigin:,,,/Resource/Images/Window/OvO.png" Stretch="Fill" />
-                <TextBox Grid.Row="1" x:Name="Dialog" Background="White" Text="{Binding DialogText}" VerticalAlignment="Top" TextWrapping="Wrap"  IsReadOnly ="True" BorderThickness ="0" FontFamily="Segoe UI"/>
+
+        <Border x:Name="DialogBorder"
+                Grid.Row="1"
+                Margin="261,410,0,0"
+                VerticalAlignment="Top"
+                BorderBrush="Black"
+                BorderThickness="3"
+                CornerRadius="5"
+                Visibility="Hidden">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0"
+                       Source="pack://siteoforigin:,,,/Resource/Images/Window/OvO.png"
+                       Stretch="Fill" />
+                <TextBox x:Name="Dialog"
+                         Grid.Row="1"
+                         VerticalAlignment="Top"
+                         Background="White"
+                         BorderThickness="0"
+                         FontFamily="Segoe UI"
+                         IsReadOnly="True"
+                         Text="{Binding DialogText}"
+                         TextWrapping="Wrap" />
             </Grid>
 
         </Border>
-        <Expander HorizontalAlignment="Left" Margin="0,200,0,50">
+        <Expander Margin="0,200,0,50" HorizontalAlignment="Left">
 
             <Grid Margin="20,-50,0,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Button  Grid.Row="0"  VerticalAlignment="Center" Height="29" Width="30"  BorderThickness="0" Command="{Binding ChangeState}" ToolTip="大破立绘切换">
+                <Button Grid.Row="0"
+                        Width="30"
+                        Height="29"
+                        VerticalAlignment="Center"
+                        BorderThickness="0"
+                        Command="{Binding WifeSer.ChangeState}"
+                        ToolTip="大破立绘切换">
                     <Button.Background>
                         <ImageBrush ImageSource="pack://siteoforigin:,,,/Resource/Images/Button/ChangeState.png" Stretch="UniformToFill" />
                     </Button.Background>
                 </Button>
 
-                <Button  Grid.Row="1"  VerticalAlignment="Center" Height="29" Width="30" BorderThickness="0" Command="{Binding ChangeDress}" ToolTip="下一张立绘">
+                <Button Grid.Row="1"
+                        Width="30"
+                        Height="29"
+                        VerticalAlignment="Center"
+                        BorderThickness="0"
+                        Command="{Binding WifeSer.ChangeDress}"
+                        ToolTip="下一张立绘">
                     <Button.Background>
                         <ImageBrush ImageSource="pack://siteoforigin:,,,/Resource/Images/Button/ChangeDress.png" Stretch="UniformToFill" />
                     </Button.Background>
                 </Button>
 
-                <Button  Grid.Row="2"  VerticalAlignment="Center" Height="29" Width="30" BorderThickness="0" Command="{Binding ChangeFormat}" ToolTip="静态立绘切换">
+                <Button Grid.Row="2"
+                        Width="30"
+                        Height="29"
+                        VerticalAlignment="Center"
+                        BorderThickness="0"
+                        Command="{Binding WifeSer.ChangeFormat}"
+                        ToolTip="静态立绘切换">
                     <Button.Background>
                         <ImageBrush ImageSource="pack://siteoforigin:,,,/Resource/Images/Button/ChangeFormat.png" Stretch="UniformToFill" />
                     </Button.Background>
                 </Button>
 
-                <Button  Grid.Row="3"  VerticalAlignment="Center" Height="29" Width="30" BorderThickness="0" Command="{Binding ChangeWife}" ToolTip="下一位舰娘">
+                <Button Grid.Row="3"
+                        Width="30"
+                        Height="29"
+                        VerticalAlignment="Center"
+                        BorderThickness="0"
+                        Command="{Binding WifeSer.ChangeWife}"
+                        ToolTip="下一位舰娘">
                     <Button.Background>
                         <ImageBrush ImageSource="pack://siteoforigin:,,,/Resource/Images/Button/ChangeWife.png" Stretch="UniformToFill" />
                     </Button.Background>

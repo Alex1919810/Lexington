@@ -1,19 +1,8 @@
 ﻿using Lexington.Model;
 using Lexington.Tools;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Lexington.View
 {
@@ -66,9 +55,9 @@ namespace Lexington.View
         private void SureClick(object sender, RoutedEventArgs e)
         {
             ResultMatter.MatterName = MatterList.Text;
-            if(StartTimePicker.Value.HasValue && EndTimePicker.Value.HasValue)
+            if (StartTimePicker.Value.HasValue && EndTimePicker.Value.HasValue)
             {
-                if((EndTimePicker.Value <= DateTime.Now))
+                if ((EndTimePicker.Value <= DateTime.Now))
                 {
                     MessageBox.Show("任务已过期，请重新设置结束时间！", "警告", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
@@ -83,7 +72,7 @@ namespace Lexington.View
             }
             if (!MatterNames.Contains(ResultMatter.MatterName)) ResultMatter.IsExpedition = false;
             ResultMatter.IsRedo = RedoBox.IsChecked.GetValueOrDefault();
-            ResultMatter.Process=DataTool.CalculateProcess(ResultMatter.StartTime,ResultMatter.EndTime);
+            ResultMatter.Process = DataTool.CalculateProcess(ResultMatter.StartTime, ResultMatter.EndTime);
             ReturnValueUpdated?.Invoke(this, ResultMatter);
             Close();
         }
