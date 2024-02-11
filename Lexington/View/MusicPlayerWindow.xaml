@@ -1,0 +1,60 @@
+﻿<Window x:Class="Lexington.View.MusicPlayerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lexington.View"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Style="{StaticResource stlWindow}"
+        Background="White"
+        Title="MusicPlayerWindow" Height="75" Width="300"
+        xmlns:viewmodel="clr-namespace:Lexington.ViewModel"
+        d:DataContext="{d:DesignInstance Type=viewmodel:MusicPlayerViewModel}">
+    <Grid>
+        <Label Content="{Binding Music.MusicName}" Width="auto" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="20,0,20,55"/>
+        <Button Content="x" FontSize="5" Width="10" Height="10" HorizontalAlignment="Left" Margin="290,0,0,65" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Slider x:Name="progressSlider" Minimum="0" Maximum="{Binding Music.MusicTime}" Value="{Binding Music.MusicProcess}" Width="300" Margin="0,30,0,0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding SliderMouseDown}" />
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding SliderMouseUp}" />
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="ValueChanged" >
+                        <i:InvokeCommandAction Command="{Binding SliderValueChange}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Slider>
+            <UniformGrid Columns="6" HorizontalAlignment="Center" Margin="0,5,0,0" Width="300">
+                <Slider  Minimum="0" Maximum="1" Value="0" Width="50"  />
+                <Button Height="20" Width="20" Style="{StaticResource PressButton}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="pack://siteoforigin:,,,/Resource/Images/Button/List.png"/>
+                    </Button.Background>
+                </Button>
+                <Button  Height="20" Width="20" Style="{StaticResource PressButton}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="pack://siteoforigin:,,,/Resource/Images/Button/Last.png"/>
+                    </Button.Background>
+                </Button>
+                <Button   Height="20" Width="20" Style="{StaticResource PressButton}" Command="{Binding PlayMusic}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="{Binding PlayPicUrl}"/>
+                    </Button.Background>
+                </Button>
+                <Button  Height="20" Width="20" Style="{StaticResource PressButton}" >
+                    <Button.Background>
+                        <ImageBrush ImageSource="pack://siteoforigin:,,,/Resource/Images/Button/Next.png"/>
+                    </Button.Background>
+                </Button>
+                <Label Content="{Binding TimeStamp}" FontSize="8" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="-5,0,0,0"/>
+            </UniformGrid>
+
+        </StackPanel>
+
+    </Grid>
+</Window>

@@ -1,0 +1,207 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <Platforms>AnyCPU;x86</Platforms>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <StartupObject>Lexington.App</StartupObject>
+    <ApplicationIcon>Resource\Images\Icon\Normal.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Resource\Data\**" />
+    <EmbeddedResource Remove="Resource\Data\**" />
+    <None Remove="Resource\Data\**" />
+    <Page Remove="Resource\Data\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resource\Images\Button\ChangeDress.png" />
+    <None Remove="Resource\Images\Button\ChangeFormat.png" />
+    <None Remove="Resource\Images\Button\ChangeState.png" />
+    <None Remove="Resource\Images\Button\ChangeWife.png" />
+    <None Remove="Resource\Images\Window\OvO.png" />
+    <None Remove="Resource\Wifes\Lexington.gif" />
+    <None Remove="Resource\Wifes\Lexington\BiKiNi\Damage.gif" />
+    <None Remove="Resource\Wifes\Lexington\BiKiNi\Damage.png" />
+    <None Remove="Resource\Wifes\Lexington\BiKiNi\Normal.gif" />
+    <None Remove="Resource\Wifes\Lexington\BiKiNi\Normal.png" />
+    <None Remove="Resource\Wifes\Lexington\Flower\Damage.gif" />
+    <None Remove="Resource\Wifes\Lexington\Flower\Damage.png" />
+    <None Remove="Resource\Wifes\Lexington\Flower\Normal.gif" />
+    <None Remove="Resource\Wifes\Lexington\Flower\Normal.png" />
+    <None Remove="Resource\Wifes\Lexington\Mia\Damage.png" />
+    <None Remove="Resource\Wifes\Lexington\Mia\Normal.png" />
+    <None Remove="Resource\Wifes\Lexington\Moon\Damage.gif" />
+    <None Remove="Resource\Wifes\Lexington\Moon\Damage.png" />
+    <None Remove="Resource\Wifes\Lexington\Moon\Normal.gif" />
+    <None Remove="Resource\Wifes\Lexington\Moon\Normal.png" />
+    <None Remove="Resource\Wifes\Lexington\Normal\Damage.gif" />
+    <None Remove="Resource\Wifes\Lexington\Normal\Damage.png" />
+    <None Remove="Resource\Wifes\Lexington\Normal\Normal.gif" />
+    <None Remove="Resource\Wifes\Lexington\Normal\Normal.png" />
+    <None Remove="Resource\Wifes\Lexington\Red\Damage.gif" />
+    <None Remove="Resource\Wifes\Lexington\Red\Damage.png" />
+    <None Remove="Resource\Wifes\Lexington\Red\Normal.gif" />
+    <None Remove="Resource\Wifes\Lexington\Red\Normal.png" />
+    <None Remove="Resource\Wifes\Lexington\ReModel\Damage.gif" />
+    <None Remove="Resource\Wifes\Lexington\ReModel\Damage.png" />
+    <None Remove="Resource\Wifes\Lexington\ReModel\Normal.gif" />
+    <None Remove="Resource\Wifes\Lexington\ReModel\Normal.png" />
+    <None Remove="Resource\Wifes\Lexington\WeddingDress\Damage.gif" />
+    <None Remove="Resource\Wifes\Lexington\WeddingDress\Damage.png" />
+    <None Remove="Resource\Wifes\Lexington\WeddingDress\Normal.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resource\Images\Button\ChangeFormat.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resource\Images\Button\ChangeWife.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Images\Icon\Normal.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Images\Window\OvO.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\Normal\Normal.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\ReModel\Damage.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\ReModel\Damage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\ReModel\Normal.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\ReModel\Normal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resource\Images\Button\ChangeState.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Images\Button\ChangeDress.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\BiKiNi\Damage.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\BiKiNi\Damage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\BiKiNi\Normal.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\BiKiNi\Normal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\Flower\Damage.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\Flower\Damage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\Flower\Normal.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\Flower\Normal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\Mia\Damage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\Mia\Normal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\Moon\Damage.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\Moon\Damage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\Moon\Normal.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\Moon\Normal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\Normal\Damage.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\Normal\Damage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\Normal\Normal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\Red\Damage.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\Red\Damage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\Red\Normal.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\Red\Normal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\WeddingDress\Damage.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\WeddingDress\Damage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\WeddingDress\Normal.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Wifes\Lexington\WeddingDress\Normal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.0" />
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+    <PackageReference Include="IP2Region" Version="1.2.0" />
+    <PackageReference Include="IPTools.China" Version="1.6.0" />
+    <PackageReference Include="XamlAnimatedGif" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ip2region.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resource\Files\CityCode.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resource\Files\ClockMatters.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resource\Files\Expedition.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resource\Images\Icon\Normal.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resource\Files\Weather\" />
+  </ItemGroup>
+
+</Project>
