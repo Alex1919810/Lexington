@@ -6,14 +6,14 @@ using Lexington.View;
 using Lexington.BaseClass;
 using System.Windows;
 using System.Windows.Input;
+using Lexington.Singleton;
 
 namespace Lexington.ViewModel
 {
     public class MainViewWindow : BViewModel<MainWindow>
     {
 
-        private WeatherWindow M_WeatherWindow;
-
+        private WindowService M_WindowService;
 
         private WeatherService M_WeatherService;
 
@@ -25,11 +25,9 @@ namespace Lexington.ViewModel
 
         private SemaphoreSlim DialogSemaphore = new SemaphoreSlim(1, 1);
 
-        private bool ReportVaild = false;
 
         private WifeChangeService M_WifeService;
 
-        private WindowService M_WindowService;
 
 
         public ICommand DialogTextDisplay {  get;private set; }
@@ -86,14 +84,13 @@ namespace Lexington.ViewModel
         private void InitData()
         {
             M_WeatherService = new WeatherService();
-            M_WeatherService.GetWeather();
-            M_WeatherWindow = new WeatherWindow();
+            M_WifeService = new WifeChangeService();
+            M_WindowService = new WindowService();
 
-            M_WindowService = new WindowService(M_Window);
+            M_WeatherService.GetWeather();
 
             M_ChatText = new ChatText();
 
-            M_WifeService = new WifeChangeService();
 
             TmpText = GlobalValue.FiveDaysWeather[0].WeatherNote;
         }
@@ -115,27 +112,18 @@ namespace Lexington.ViewModel
         {
             if (DialogSemaphore.CurrentCount == 1) ClickCount = 0;
             ClickCount = (ClickCount % 3) + 1;
-            switch (ClickCount)
+
+            if (ClickCount == 1 && DialogSemaphore.CurrentCount == 1)
             {
-                case 1:
-                    if (DialogSemaphore.CurrentCount == 1)
-                    {
-                        M_Window.DialogBorder.Visibility = Visibility.Visible;
-                        DialogSemaphore.Wait();
-                        if (DialogState == 1)
-                        {
-                            SetNewWindowPosition(M_Window, M_WeatherWindow, 100);
-                            ReportVaild = true;
-                            M_WeatherWindow.Show();
-                            M_WeatherWindow.Activate();
-                        }
-                        Task.Run(() => DisplayTextAsync(DialogState));
-                    }
-                    break;
-                case 2:
-                case 3:
-                    break;
+                M_Window.DialogBorder.Visibility = Visibility.Visible;
+                DialogSemaphore.Wait();
+                if (DialogState == 1)
+                {
+                    WindowManager.Instance.OpenWindow<WeatherWindow>(typeof(MainWindow), 100);
+                }
+                Task.Run(() => DisplayTextAsync(DialogState));
             }
+
 
 
         }
@@ -178,10 +166,9 @@ namespace Lexington.ViewModel
             {
                 M_Window.DialogBorder.Visibility = Visibility.Hidden;
                 DialogText = string.Empty;
-                if (DialogState == 1 && ReportVaild == true)
+                if (DialogState == 1 && WindowManager.Instance.IsWindowVisible(typeof(WeatherWindow)))
                 {
-                    ReportVaild = false;
-                    M_WeatherWindow.Hide();
+                    WindowManager.Instance.SetWindowHide(typeof(WeatherWindow));
                 }
             });
 
@@ -226,14 +213,6 @@ namespace Lexington.ViewModel
                 DialogSemaphore.Release();
 
             }
-        }
-
-        private void SetNewWindowPosition(Window FatherWindow, Window ChildWindow, double PosX = 0, double PoxY = 0)
-        {
-            double FatherWindowTop = FatherWindow.Top;
-            double FatherWindowLeft = FatherWindow.Left;
-            ChildWindow.Left = FatherWindowLeft + PosX;
-            ChildWindow.Top = FatherWindowTop + PoxY;
         }
 
 

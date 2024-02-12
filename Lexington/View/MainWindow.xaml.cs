@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Lexington.Singleton;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Lexington
@@ -13,6 +14,7 @@ namespace Lexington
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            WindowManager.Instance.AddWindow(this);
             DataContext = new ViewModel.MainViewWindow(this);
         }
 
