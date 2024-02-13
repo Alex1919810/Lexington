@@ -10,7 +10,7 @@ using Lexington.Singleton;
 
 namespace Lexington.ViewModel
 {
-    public class MainViewWindow : BViewModel<MainWindow>
+    public class MainViewWindow : BaseViewModel<MainWindow>
     {
 
         private WindowService M_WindowService;
@@ -119,7 +119,7 @@ namespace Lexington.ViewModel
                 DialogSemaphore.Wait();
                 if (DialogState == 1)
                 {
-                    WindowManager.Instance.OpenWindow<WeatherWindow>(typeof(MainWindow), 100);
+                    WindowManager.Instance.OpenAndCloseWindow<WeatherWindow>(typeof(MainWindow), 100);
                 }
                 Task.Run(() => DisplayTextAsync(DialogState));
             }
@@ -168,7 +168,7 @@ namespace Lexington.ViewModel
                 DialogText = string.Empty;
                 if (DialogState == 1 && WindowManager.Instance.IsWindowVisible(typeof(WeatherWindow)))
                 {
-                    WindowManager.Instance.SetWindowHide(typeof(WeatherWindow));
+                    WindowManager.Instance.SetWindowClose(typeof(WeatherWindow));
                 }
             });
 

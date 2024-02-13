@@ -40,8 +40,7 @@ namespace Lexington.Singleton
             Type windowType = typeof(T);
             if (!M_Windows.ContainsKey(windowType))
             {
-                M_Windows[windowType] = new T();
-                M_Windows[windowType].Closed += (sender, args) => M_Windows.Remove(windowType);
+                return null;
             }
             return (T)M_Windows[windowType];
         }
@@ -53,15 +52,26 @@ namespace Lexington.Singleton
             return window;
         }
 
-        public void OpenWindow<T>(Type FatherWindowType = null,double X = 0,double Y=0) where T : Window, new()
+        public void OpenAndCloseWindow<T>(Type FatherWindowType = null,double X = 0,double Y=0) where T : Window, new()
         {
             var window = GetWindow<T>();
-            if(FatherWindowType != null && M_Windows.ContainsKey(FatherWindowType))
+            if(window == null)
             {
-                SetNewWindowPosition(M_Windows[FatherWindowType],window,X,Y);
+                Type windowType = typeof(T);
+                M_Windows[windowType] = new T();
+                M_Windows[windowType].Closed += (sender, args) => M_Windows.Remove(windowType);
+                window = (T)M_Windows[windowType];
+                if (FatherWindowType != null && M_Windows.ContainsKey(FatherWindowType))
+                {
+                    SetNewWindowPosition(M_Windows[FatherWindowType], window, X, Y);
+                }
+                window.Show();
+                window.Activate();
             }
-            window.Show();
-            window.Activate();
+            else
+            {
+                window.Close();
+            }
         }
 
         public void AddWindow<T>(T window) where T : Window, new()
@@ -92,7 +102,16 @@ namespace Lexington.Singleton
             }
         }
 
-        public void SetNewWindowPosition(Window FatherWindow, Window ChildWindow, double PosX = 0, double PoxY = 0)
+        public void SetWindowClose(Type type)
+        {
+            if (!M_Windows.ContainsKey(type)) return;
+            else
+            {
+                M_Windows[type].Close();
+            }
+        }
+
+        private void SetNewWindowPosition(Window FatherWindow, Window ChildWindow, double PosX = 0, double PoxY = 0)
         {
             double FatherWindowTop = FatherWindow.Top;
             double FatherWindowLeft = FatherWindow.Left;

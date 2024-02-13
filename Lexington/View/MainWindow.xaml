@@ -41,9 +41,9 @@
             <Image.ContextMenu>
                 <ContextMenu>
                     <MenuItem Command="{Binding WindowSer.GetReport}" Header="打开/关闭天气预报" />
-                    <MenuItem Command="{Binding WindowSer.GetMatters}" Header="打开待办事项" />
-                    <MenuItem Command="{Binding WindowSer.GetMemo}" Header="打开备忘录" />
-                    <MenuItem Command="{Binding WindowSer.GetMusicPlayer}" Header="打开音乐播放器" />
+                    <MenuItem Command="{Binding WindowSer.GetMatters}" Header="打开/关闭待办事项" />
+                    <MenuItem Command="{Binding WindowSer.GetMemo}" Header="打开/关闭备忘录" />
+                    <MenuItem Command="{Binding WindowSer.GetMusicPlayer}" Header="打开/关闭音乐播放器" />
                 </ContextMenu>
             </Image.ContextMenu>
         </Image>

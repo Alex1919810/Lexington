@@ -15,10 +15,10 @@ namespace Lexington.Service
 
         public WindowService() 
         {
-            GetReport = new RelayCommand<object>(param => WindowManager.Instance.OpenWindow<WeatherWindow>(typeof(MainWindow), 100));
-            GetMatters = new RelayCommand<object>(param => WindowManager.Instance.OpenWindow<ClockWindow>(typeof(ClockWindow)));
-            GetMemo = new RelayCommand<object>(param => WindowManager.Instance.OpenWindow<MemoWindow>(typeof(MemoWindow)));
-            GetMusicPlayer = new RelayCommand<object>(param => WindowManager.Instance.OpenWindow<MusicPlayerWindow>(typeof(MainWindow)));
+            GetReport = new RelayCommand<object>(param => WindowManager.Instance.OpenAndCloseWindow<WeatherWindow>(typeof(MainWindow), 100));
+            GetMatters = new RelayCommand<object>(param => WindowManager.Instance.OpenAndCloseWindow<ClockWindow>(typeof(ClockWindow)));
+            GetMemo = new RelayCommand<object>(param => WindowManager.Instance.OpenAndCloseWindow<MemoWindow>(typeof(MemoWindow)));
+            GetMusicPlayer = new RelayCommand<object>(param => WindowManager.Instance.OpenAndCloseWindow<MusicPlayerWindow>(typeof(MainWindow)));
         }
     }
 }

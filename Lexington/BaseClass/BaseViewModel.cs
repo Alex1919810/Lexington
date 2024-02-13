@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace Lexington.BaseClass
 {
-    public class BViewModel<T_Window>:NotifyPropertyChanged where T_Window : Window 
+    public class BaseViewModel<T_Window>:NotifyPropertyChanged where T_Window : Window 
     {
         public ICommand WindowMove_LeftMouseDown { get;private set; }
 
@@ -23,7 +23,7 @@ namespace Lexington.BaseClass
 
         protected bool IsDragging = false;
 
-        protected BViewModel(T_Window B_Window)
+        protected BaseViewModel(T_Window B_Window)
         {
             M_Window = B_Window;
 
