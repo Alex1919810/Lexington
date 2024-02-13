@@ -1,6 +1,7 @@
 ﻿using Lexington.BaseClass;
 using Lexington.Command;
 using Lexington.Model;
+using Lexington.Service;
 using Lexington.Tools;
 using NAudio.Wave;
 using System.Windows;
@@ -19,22 +20,28 @@ namespace Lexington.ViewModel
 
         private bool IsSlider = false;
 
+        private bool IsVolume = false;
+
+        private double M_Volume;
+
         private DispatcherTimer Timer;
 
-        private string _PlayPicUrl = string.Empty;
+        private string M_PlayPicUrl = string.Empty;
 
-        private Music _Music;
+        private Music M_Music;
 
-        private string _TimeStamp = string.Empty;
+        private string M_TimeStamp = string.Empty;
+
+        private WindowService M_WindowService;
 
         public string TimeStamp
         {
-            get { return _TimeStamp; }
+            get { return M_TimeStamp; }
             set
             {
-                if (_TimeStamp != value)
+                if (M_TimeStamp != value)
                 {
-                    _TimeStamp = value;
+                    M_TimeStamp = value;
                     OnPropertyChanged(nameof(TimeStamp));
                 }
             }
@@ -43,13 +50,13 @@ namespace Lexington.ViewModel
         {
             get
             {
-                return _Music;
+                return M_Music;
             }
             set
             {
-                if (_Music != value)
+                if (M_Music != value)
                 {
-                    _Music = value;
+                    M_Music = value;
                 }
                 OnPropertyChanged(nameof(Music));
             }
@@ -60,17 +67,51 @@ namespace Lexington.ViewModel
         {
             get
             {
-                return _PlayPicUrl;
+                return M_PlayPicUrl;
             }
             set
             {
-                if (_PlayPicUrl != value)
+                if (M_PlayPicUrl != value)
                 {
-                    _PlayPicUrl = value;
+                    M_PlayPicUrl = value;
                 }
                 OnPropertyChanged(nameof(PlayPicUrl));
             }
         }
+
+        public double Volume
+        {
+            get
+            {
+                return M_Volume;
+            }
+            set
+            {
+                if (M_Volume != value)
+                {
+                    M_Volume = value;
+                }
+                OnPropertyChanged(nameof(Volume));
+            }
+        }
+
+        public WindowService WindowSer
+        {
+            get
+            {
+                return M_WindowService;
+            }
+            set
+            {
+                if (M_WindowService != value)
+                {
+                    M_WindowService = value;
+                }
+                OnPropertyChanged(nameof(WindowSer));
+            }
+        }
+
+
         public ICommand PlayMusic { get; set; }
 
         public ICommand SliderMouseDown { get; set; }
@@ -78,12 +119,20 @@ namespace Lexington.ViewModel
         public ICommand SliderMouseUp { get; set; }
 
         public ICommand SliderValueChange { get; set; }
+        public ICommand VolumeValueChange { get; set; }
+
 
         public MusicPlayerViewModel()
         {
+            InitService();
             InitializeAudio();
             InitializeData();
             InitializeCommand();
+        }
+
+        private void InitService()
+        {
+            M_WindowService = new WindowService();
         }
 
         private void InitializeCommand()
@@ -92,6 +141,7 @@ namespace Lexington.ViewModel
             SliderMouseDown = new RelayCommand<object>(param => MouseDownSlider());
             SliderMouseUp = new RelayCommand<object>(param => MouseUpSlider());
             SliderValueChange = new RelayCommand<object>(param => ValueChangedSlider());
+            VolumeValueChange = new RelayCommand<object>(param => ValueChangedVolume());
         }
 
         private void InitializeData()
@@ -120,7 +170,7 @@ namespace Lexington.ViewModel
             WaveOutEvent = new WaveOutEvent();
             AudioFileReader = new AudioFileReader(audioFilePath);
             WaveOutEvent.Init(AudioFileReader);
-
+            WaveOutEvent.Volume = (float)Volume;
             // 当播放完成时，切换按钮状态为暂停
             WaveOutEvent.PlaybackStopped += (sender, e) =>
             {
@@ -194,6 +244,13 @@ namespace Lexington.ViewModel
             {
                 TimeStamp = TimeSpan.FromSeconds(Music.MusicProcess).ToString(@"mm\:ss") + "/" + AudioFileReader.TotalTime.ToString(@"mm\:ss");
             }
+        }
+
+
+
+        private void ValueChangedVolume()
+        {
+            WaveOutEvent.Volume = (float)Volume;
         }
 
 

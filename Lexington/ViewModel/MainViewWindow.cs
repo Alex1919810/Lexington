@@ -76,21 +76,24 @@ namespace Lexington.ViewModel
 
         public MainViewWindow(MainWindow mainWindow):base(mainWindow)
         {
+            InitService();
             InitData();
             InitCommand();
             StartTask();
         }
 
-        private void InitData()
+        private void InitService()
         {
             M_WeatherService = new WeatherService();
             M_WifeService = new WifeChangeService();
             M_WindowService = new WindowService();
+        }
 
+        private void InitData()
+        {
             M_WeatherService.GetWeather();
 
             M_ChatText = new ChatText();
-
 
             TmpText = GlobalValue.FiveDaysWeather[0].WeatherNote;
         }

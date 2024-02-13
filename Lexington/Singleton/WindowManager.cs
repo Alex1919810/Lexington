@@ -111,6 +111,17 @@ namespace Lexington.Singleton
             }
         }
 
+        public void SetWindowClose(string param)
+        {
+            param = "Lexington.View." + param;
+            Type type = Type.GetType(param);
+            if (!M_Windows.ContainsKey(type)) return;
+            else
+            {
+                M_Windows[type].Close();
+            }
+        }
+
         private void SetNewWindowPosition(Window FatherWindow, Window ChildWindow, double PosX = 0, double PoxY = 0)
         {
             double FatherWindowTop = FatherWindow.Top;

@@ -7,6 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lexington", "Lexington\Lexi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LexingtonUnitTest", "LexingtonUnitTest\LexingtonUnitTest.csproj", "{86B6F844-4E6D-442C-B7EE-ED4B967F3CEC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LexingtonAppDemo", "LexingtonAppDemo\LexingtonAppDemo.csproj", "{5FA18BC5-F434-4E4F-9780-4B72159AA05E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LexingtonControl", "LexingtonControl", "{FC36B7D8-91D3-4B66-8CA5-A09738E49500}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LexingtonCustomControlLibrary", "LexingtonCustomControlLibrary\LexingtonCustomControlLibrary.csproj", "{CD615C18-E6E0-44ED-8D29-B9BC77A8C83D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,9 +37,29 @@ Global
 		{86B6F844-4E6D-442C-B7EE-ED4B967F3CEC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{86B6F844-4E6D-442C-B7EE-ED4B967F3CEC}.Release|x86.ActiveCfg = Release|Any CPU
 		{86B6F844-4E6D-442C-B7EE-ED4B967F3CEC}.Release|x86.Build.0 = Release|Any CPU
+		{5FA18BC5-F434-4E4F-9780-4B72159AA05E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FA18BC5-F434-4E4F-9780-4B72159AA05E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FA18BC5-F434-4E4F-9780-4B72159AA05E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5FA18BC5-F434-4E4F-9780-4B72159AA05E}.Debug|x86.Build.0 = Debug|Any CPU
+		{5FA18BC5-F434-4E4F-9780-4B72159AA05E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FA18BC5-F434-4E4F-9780-4B72159AA05E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FA18BC5-F434-4E4F-9780-4B72159AA05E}.Release|x86.ActiveCfg = Release|Any CPU
+		{5FA18BC5-F434-4E4F-9780-4B72159AA05E}.Release|x86.Build.0 = Release|Any CPU
+		{CD615C18-E6E0-44ED-8D29-B9BC77A8C83D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD615C18-E6E0-44ED-8D29-B9BC77A8C83D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD615C18-E6E0-44ED-8D29-B9BC77A8C83D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CD615C18-E6E0-44ED-8D29-B9BC77A8C83D}.Debug|x86.Build.0 = Debug|Any CPU
+		{CD615C18-E6E0-44ED-8D29-B9BC77A8C83D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD615C18-E6E0-44ED-8D29-B9BC77A8C83D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD615C18-E6E0-44ED-8D29-B9BC77A8C83D}.Release|x86.ActiveCfg = Release|Any CPU
+		{CD615C18-E6E0-44ED-8D29-B9BC77A8C83D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5FA18BC5-F434-4E4F-9780-4B72159AA05E} = {FC36B7D8-91D3-4B66-8CA5-A09738E49500}
+		{CD615C18-E6E0-44ED-8D29-B9BC77A8C83D} = {FC36B7D8-91D3-4B66-8CA5-A09738E49500}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {102CFD6D-7894-4839-B348-92F16CC807A3}

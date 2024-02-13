@@ -13,12 +13,16 @@ namespace Lexington.Service
 
         public ICommand GetMusicPlayer { get; private set; }
 
+        public ICommand CloseWindow { get; private set; }
+
+
         public WindowService() 
         {
             GetReport = new RelayCommand<object>(param => WindowManager.Instance.OpenAndCloseWindow<WeatherWindow>(typeof(MainWindow), 100));
-            GetMatters = new RelayCommand<object>(param => WindowManager.Instance.OpenAndCloseWindow<ClockWindow>(typeof(ClockWindow)));
-            GetMemo = new RelayCommand<object>(param => WindowManager.Instance.OpenAndCloseWindow<MemoWindow>(typeof(MemoWindow)));
+            GetMatters = new RelayCommand<object>(param => WindowManager.Instance.OpenAndCloseWindow<ClockWindow>());
+            GetMemo = new RelayCommand<object>(param => WindowManager.Instance.OpenAndCloseWindow<MemoWindow>());
             GetMusicPlayer = new RelayCommand<object>(param => WindowManager.Instance.OpenAndCloseWindow<MusicPlayerWindow>(typeof(MainWindow)));
+            CloseWindow = new RelayCommand<string>(param=>WindowManager.Instance.SetWindowClose(param));
         }
     }
 }

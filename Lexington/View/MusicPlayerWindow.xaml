@@ -19,14 +19,16 @@
                HorizontalContentAlignment="Center"
                VerticalContentAlignment="Center"
                Content="{Binding Music.MusicName}" />
-        <Button Width="10"
-                Height="10"
-                Margin="290,0,0,65"
+        <Button Width="15"
+                Height="15"
+                Margin="285,0,0,60"
                 HorizontalAlignment="Left"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
-                Content="x"
-                FontSize="5" />
+                Command="{Binding WindowSer.CloseWindow}"
+                CommandParameter="MusicPlayerWindow"
+                Content="X"
+                FontSize="10" />
 
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -53,10 +55,16 @@
                          Margin="0,5,0,0"
                          HorizontalAlignment="Center"
                          Columns="6">
-                <Slider Width="50"
-                        Maximum="1"
+                <Slider Maximum="1"
                         Minimum="0"
-                        Value="0" />
+                        Style="{StaticResource SliderStyle1}"
+                        Value="{Binding Volume}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="ValueChanged">
+                            <i:InvokeCommandAction Command="{Binding VolumeValueChange}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Slider>
                 <Button Width="20"
                         Height="20"
                         Style="{StaticResource PressButton}">
