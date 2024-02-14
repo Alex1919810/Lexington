@@ -11,13 +11,13 @@ namespace Lexington.View
         public MemoWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModel.MemoViewWindow(this);
+            DataContext = new ViewModel.MemoViewModel(this);
 
             KeyBinding keyBinding = new KeyBinding
             {
                 Key = Key.S,
                 Modifiers = ModifierKeys.Control,
-                Command = ((ViewModel.MemoViewWindow)DataContext).SaveText
+                Command = ((ViewModel.MemoViewModel)DataContext).SaveText
             };
 
             this.InputBindings.Add(keyBinding);
@@ -26,7 +26,7 @@ namespace Lexington.View
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            ((ViewModel.MemoViewWindow)DataContext)?.SaveText.Execute(null);
+            ((ViewModel.MemoViewModel)DataContext)?.SaveText.Execute(null);
         }
     }
 }

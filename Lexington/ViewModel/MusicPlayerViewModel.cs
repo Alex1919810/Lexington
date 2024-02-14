@@ -3,6 +3,7 @@ using Lexington.Command;
 using Lexington.Model;
 using Lexington.Service;
 using Lexington.Tools;
+using Lexington.View;
 using NAudio.Wave;
 using System.Windows;
 using System.Windows.Input;
@@ -10,17 +11,18 @@ using System.Windows.Threading;
 
 namespace Lexington.ViewModel
 {
-    internal class MusicPlayerViewModel : NotifyPropertyChanged
+    internal class MusicPlayerViewModel : BaseViewModel<MusicPlayerWindow>
     {
-        private WaveOutEvent WaveOutEvent;
+        private WaveOutEvent M_WaveOutEvent;
 
-        private AudioFileReader AudioFileReader;
+        private AudioFileReader M_AudioFileReader;
+
+        private int M_MusicIndex = 0;
 
         private bool IsPlaying = false;
 
         private bool IsSlider = false;
 
-        private bool IsVolume = false;
 
         private double M_Volume;
 
@@ -33,6 +35,7 @@ namespace Lexington.ViewModel
         private string M_TimeStamp = string.Empty;
 
         private WindowService M_WindowService;
+
 
         public string TimeStamp
         {
@@ -120,13 +123,17 @@ namespace Lexington.ViewModel
 
         public ICommand SliderValueChange { get; set; }
         public ICommand VolumeValueChange { get; set; }
+        public ICommand ToNextMusic { get; set; }
+
+        public ICommand ToLastMusic { get; set; }
 
 
-        public MusicPlayerViewModel()
+
+        public MusicPlayerViewModel(MusicPlayerWindow musicPlayerWindow) : base(musicPlayerWindow)
         {
             InitService();
-            InitializeAudio();
             InitializeData();
+            InitializeAudio();
             InitializeCommand();
         }
 
@@ -142,19 +149,45 @@ namespace Lexington.ViewModel
             SliderMouseUp = new RelayCommand<object>(param => MouseUpSlider());
             SliderValueChange = new RelayCommand<object>(param => ValueChangedSlider());
             VolumeValueChange = new RelayCommand<object>(param => ValueChangedVolume());
+            ToNextMusic = new RelayCommand<object>(param=>NextMusic());
+            ToLastMusic = new RelayCommand<object>(param => LastMusic());
         }
 
         private void InitializeData()
         {
             PlayPicUrl = GetPicUrl();
 
+            Volume = 1.0;
+
+            DataTool.LoadMusics();
+        }
+
+        private void InitializeAudio()
+        {
+
+            Music = GlobalValue.MusicsList[M_MusicIndex];
+            string audioFilePath = Music.MusicPath;
+            M_WaveOutEvent = new WaveOutEvent();
+            M_AudioFileReader = new AudioFileReader(audioFilePath);
+            M_WaveOutEvent.Init(M_AudioFileReader);
+            M_WaveOutEvent.Volume = (float)Volume;
+
+            InitTimer();
+
+            M_Window.Closed += (sender,args) => M_WaveOutEvent.Dispose();
+
+
+        }
+
+        private void InitTimer()
+        {
             Timer = new DispatcherTimer();
             Timer.Interval = TimeSpan.FromSeconds(1);
             Timer.Tick += MusicProcess_Tick;
 
-            if (AudioFileReader != null)
+            if (M_AudioFileReader != null)
             {
-                TimeStamp = "00:00/" + AudioFileReader.TotalTime.ToString(@"mm\:ss");
+                TimeStamp = "00:00/" + M_AudioFileReader.TotalTime.ToString(@"mm\:ss");
             }
             else
             {
@@ -162,43 +195,24 @@ namespace Lexington.ViewModel
             }
         }
 
-        private void InitializeAudio()
-        {
-            string audioFilePath = FilesTool.FilePathCombine("Musics/test.mp3", 0);
 
-            string MusicName = "test";
-            WaveOutEvent = new WaveOutEvent();
-            AudioFileReader = new AudioFileReader(audioFilePath);
-            WaveOutEvent.Init(AudioFileReader);
-            WaveOutEvent.Volume = (float)Volume;
-            // 当播放完成时，切换按钮状态为暂停
-            WaveOutEvent.PlaybackStopped += (sender, e) =>
-            {
-                IsPlaying = false;
-                PlayPicUrl = GetPicUrl();
-                Timer.Stop();
-            };
-
-            Music = new Music(MusicName, AudioFileReader.TotalTime.TotalSeconds);
-        }
-
-        private async void MusicClick()
+        private void  MusicClick()
         {
             IsPlaying = !IsPlaying;
             PlayPicUrl = GetPicUrl();
-            await Task.Run(() => TogglePlayPause());
+            TogglePlayPause();
         }
 
         private void TogglePlayPause()
         {
             if (IsPlaying)
             {
-                Application.Current.Dispatcher.Invoke(() => WaveOutEvent.Play());
+                 M_WaveOutEvent.Play();
                 Timer.Start();
             }
             else
             {
-                Application.Current.Dispatcher.Invoke(() => WaveOutEvent.Pause());
+                M_WaveOutEvent.Pause();
                 Timer.Stop();
             }
         }
@@ -221,8 +235,13 @@ namespace Lexington.ViewModel
         {
             if (!IsSlider)
             {
-                Music.MusicProcess = AudioFileReader.CurrentTime.TotalSeconds;
-                TimeStamp = AudioFileReader.CurrentTime.ToString(@"mm\:ss") + "/" + AudioFileReader.TotalTime.ToString(@"mm\:ss");
+                Music.MusicProcess = M_AudioFileReader.CurrentTime.TotalSeconds;
+                if (M_AudioFileReader.CurrentTime.TotalSeconds >= M_AudioFileReader.TotalTime.TotalSeconds)
+                {
+                    MusicStop();
+                }
+                TimeStamp = M_AudioFileReader.CurrentTime.ToString(@"mm\:ss") + "/" + M_AudioFileReader.TotalTime.ToString(@"mm\:ss");
+
             }
         }
 
@@ -234,7 +253,7 @@ namespace Lexington.ViewModel
         private void MouseUpSlider()
         {
             // 释放鼠标时，应用目标进度
-            AudioFileReader.CurrentTime = TimeSpan.FromSeconds(Music.MusicProcess);
+            M_AudioFileReader.CurrentTime = TimeSpan.FromSeconds(Music.MusicProcess);
             IsSlider = false; // 拖动结束，恢复更新界面
         }
 
@@ -242,16 +261,61 @@ namespace Lexington.ViewModel
         {
             if (IsSlider)
             {
-                TimeStamp = TimeSpan.FromSeconds(Music.MusicProcess).ToString(@"mm\:ss") + "/" + AudioFileReader.TotalTime.ToString(@"mm\:ss");
+                TimeStamp = TimeSpan.FromSeconds(Music.MusicProcess).ToString(@"mm\:ss") + "/" + M_AudioFileReader.TotalTime.ToString(@"mm\:ss");
             }
         }
 
-
-
         private void ValueChangedVolume()
         {
-            WaveOutEvent.Volume = (float)Volume;
+            M_WaveOutEvent.Volume = (float)Volume;
         }
+
+        private void MusicStop()
+        {
+            IsPlaying = false;
+            PlayPicUrl = GetPicUrl();
+            Timer.Stop();
+        }
+
+        private void MusicPlay()
+        {
+            IsPlaying = true;
+            PlayPicUrl = GetPicUrl();
+            Timer.Start();
+        }
+
+        private void NextMusic()
+        {
+            StopAndDispose();
+            M_MusicIndex = (M_MusicIndex +1) % GlobalValue.MusicsList.Count;
+            ReInitAndStart();
+        }
+
+        private void LastMusic()
+        {
+            StopAndDispose();
+            M_MusicIndex = (M_MusicIndex == 0) ? GlobalValue.MusicsList.Count - 1 : M_MusicIndex - 1;
+            ReInitAndStart() ;
+
+        }
+
+        private void StopAndDispose()
+        {
+            M_WaveOutEvent.Stop();
+            //M_WaveOutEvent.Dispose();
+
+        }
+
+        private void ReInitAndStart()
+        {
+            M_Music.ProcessClear();
+            Music = GlobalValue.MusicsList[M_MusicIndex];
+            M_AudioFileReader = new AudioFileReader(Music.MusicPath);
+            M_WaveOutEvent.Init(M_AudioFileReader);
+            MusicPlay();
+            M_WaveOutEvent.Play();
+        }
+
 
 
 

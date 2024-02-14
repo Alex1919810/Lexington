@@ -4,20 +4,24 @@ namespace Lexington.Model
 {
     internal class Music : NotifyPropertyChanged
     {
-        private string _MusicName = string.Empty;
+        private string M_MusicName = string.Empty;
 
-        private double _MusicProcess = 0.0;
+        private double M_MusicProcess = 0.0;
 
-        private double _MusicTime = 0.0;
+        private double M_MusicTime = 0.0;
+
+        private string M_Path =string.Empty;
+
+        public string MusicPath {  get=>M_Path;private set=>M_Path=value; }
 
         public string MusicName
         {
-            get { return _MusicName; }
+            get { return M_MusicName; }
             set
             {
-                if (_MusicName != value)
+                if (M_MusicName != value)
                 {
-                    _MusicName = value;
+                    M_MusicName = value;
                     OnPropertyChanged(nameof(MusicName));
                 }
             }
@@ -25,12 +29,12 @@ namespace Lexington.Model
 
         public double MusicProcess
         {
-            get { return _MusicProcess; }
+            get { return M_MusicProcess; }
             set
             {
-                if (_MusicProcess != value)
+                if (M_MusicProcess != value)
                 {
-                    _MusicProcess = value;
+                    M_MusicProcess = value;
                     OnPropertyChanged(nameof(MusicProcess));
                 }
             }
@@ -38,22 +42,28 @@ namespace Lexington.Model
 
         public double MusicTime
         {
-            get { return _MusicTime; }
+            get { return M_MusicTime; }
             set
             {
-                if (_MusicTime != value)
+                if (M_MusicTime != value)
                 {
-                    _MusicTime = value;
+                    M_MusicTime = value;
                     OnPropertyChanged(nameof(MusicTime));
                 }
             }
         }
 
-        public Music(string Name, double Time)
+        public Music(string Name, double Time, string Path)
         {
-            _MusicName = Name;
-            _MusicProcess = 0;
-            _MusicTime = Time;
+            M_MusicName = Name;
+            M_MusicProcess = 0;
+            M_MusicTime = Time;
+            M_Path = Path;
+        }
+
+        public void ProcessClear()
+        {
+            M_MusicProcess = 0.0;
         }
     }
 }

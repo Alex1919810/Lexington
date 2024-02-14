@@ -9,6 +9,12 @@ namespace LexingtonUnitTest
     {
 
         [TestMethod]
+        public void TestMethod2()
+        {
+            DataTool.LoadMusics();
+        }
+
+        [TestMethod]
         public void TestMethod3()
         {
             ObservableCollection<string> s = new ObservableCollection<string>();

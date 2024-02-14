@@ -15,7 +15,7 @@ namespace Lexington
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             WindowManager.Instance.AddWindow(this);
-            DataContext = new ViewModel.MainViewWindow(this);
+            DataContext = new ViewModel.MainViewModel(this);
         }
 
         private void Open_Click(object sender, RoutedEventArgs e)

@@ -11,7 +11,7 @@ namespace Lexington.View
         public MusicPlayerWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModel.MusicPlayerViewModel();
+            DataContext = new ViewModel.MusicPlayerViewModel(this);
         }
     }
 }

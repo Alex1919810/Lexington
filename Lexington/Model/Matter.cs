@@ -9,7 +9,7 @@ namespace Lexington.Model
 
         public DateTime? EndTime { get; set; }
 
-        private double _Process { get; set; } = 0;
+        private double M_Process { get; set; } = 0;
 
         public bool IsRunning { get; set; } = true;
 
@@ -19,12 +19,12 @@ namespace Lexington.Model
 
         public double Process
         {
-            get { return _Process; }
+            get { return M_Process; }
             set
             {
-                if (_Process != value)
+                if (M_Process != value)
                 {
-                    _Process = value;
+                    M_Process = value;
                     OnPropertyChanged(nameof(Process));
                 }
             }

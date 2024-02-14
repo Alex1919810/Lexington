@@ -11,7 +11,7 @@ namespace Lexington.View
         public ClockWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModel.ClockViewWindow();
+            DataContext = new ViewModel.ClockViewModel();
         }
 
         private void DataGrid_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)

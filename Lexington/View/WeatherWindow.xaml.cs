@@ -14,7 +14,7 @@ namespace Lexington.View
         public WeatherWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModel.WeatherViewWindow(this);
+            DataContext = new ViewModel.WeatherViewModel(this);
         }
 
 

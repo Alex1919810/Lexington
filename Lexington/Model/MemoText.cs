@@ -4,18 +4,18 @@ namespace Lexington.Model
 {
     public class MemoText : NotifyPropertyChanged
     {
-        private string _Text { get; set; } = string.Empty;
+        private string M_Text { get; set; } = string.Empty;
 
-        private string _SaveTime { get; set; } = string.Empty;
+        private string M_SaveTime { get; set; } = string.Empty;
 
         public string SaveTime
         {
-            get { return _SaveTime; }
+            get { return M_SaveTime; }
             set
             {
-                if (_SaveTime != value)
+                if (M_SaveTime != value)
                 {
-                    _SaveTime = value;
+                    M_SaveTime = value;
                     OnPropertyChanged(nameof(SaveTime));
                 }
             }
@@ -24,12 +24,12 @@ namespace Lexington.Model
 
         public string Text
         {
-            get { return _Text; }
+            get { return M_Text; }
             set
             {
-                if (_Text != value)
+                if (M_Text != value)
                 {
-                    _Text = value;
+                    M_Text = value;
                     OnPropertyChanged(nameof(Text));
                 }
             }

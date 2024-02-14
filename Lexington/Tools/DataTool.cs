@@ -1,4 +1,6 @@
 ﻿using Lexington.Model;
+using NAudio.Wave;
+using System.IO;
 
 namespace Lexington.Tools
 {
@@ -96,6 +98,27 @@ namespace Lexington.Tools
             }
 
             return totalMilliSecends;
+        }
+
+        public static void LoadMusics()
+        {
+            string path = FilesTool.FilePathCombine("Musics", 0);
+            if (Directory.Exists(path))
+            {
+                // 获取目录下的所有文件路径
+                string[] files = Directory.GetFiles(path);
+
+                // 遍历文件路径，并获取文件名
+                foreach (string filePath in files)
+                {
+
+                    string fileName = Path.GetFileNameWithoutExtension(filePath);
+                    Console.WriteLine(fileName);
+                    AudioFileReader audioFileReader = new AudioFileReader(filePath);
+                    Music music = new Music(fileName,audioFileReader.TotalTime.TotalSeconds,filePath);
+                    GlobalValue.MusicsList.Add(music);
+                }
+            }
         }
     }
 
