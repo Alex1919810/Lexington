@@ -2,7 +2,7 @@
 using Lexington.Tools;
 using System.Windows;
 
-namespace Lexington.View
+namespace Lexington
 {
     // <summary>
     // Interaction logic for App.xaml

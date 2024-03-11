@@ -13,17 +13,6 @@
         Background="White"
         Style="{StaticResource stlWindow}"
         mc:Ignorable="d">
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-            <i:InvokeCommandAction Command="{Binding WindowMove_LeftMouseDown}" PassEventArgsToCommand="True" />
-        </i:EventTrigger>
-        <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-            <i:InvokeCommandAction Command="{Binding WindowMove_LeftMouseUp}" PassEventArgsToCommand="True" />
-        </i:EventTrigger>
-        <i:EventTrigger EventName="PreviewMouseMove">
-            <i:InvokeCommandAction Command="{Binding WindowMove_MouseMove}" PassEventArgsToCommand="True" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
     <Grid>
         <Label Width="auto"
                Margin="20,0,20,50"
@@ -79,7 +68,6 @@
                 </Slider>
                 <Button Width="20"
                         Height="20"
-                        Command="{Binding OpenMusicList}"
                         Style="{StaticResource PressButton}">
                     <Button.Background>
                         <ImageBrush ImageSource="pack://siteoforigin:,,,/Resource/Images/Button/List.png" />

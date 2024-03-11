@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace Lexington.View
+namespace Lexington
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

@@ -1,4 +1,4 @@
-﻿<Window x:Class="Lexington.View.MainWindow"
+﻿<Window x:Class="Lexington.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,7 +11,7 @@
         Title="MainWindow"
         Width="611"
         Height="611"
-        d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
+        d:DataContext="{d:DesignInstance Type=viewmodel:MainViewWindow}"
         Style="{StaticResource stlWindow}"
         mc:Ignorable="d">
     <i:Interaction.Triggers>
@@ -40,14 +40,10 @@
             </i:Interaction.Triggers>
             <Image.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Command="{Binding WindowSer.GetReport}"
-                              CommandParameter="MainWindow,100"
-                              Header="打开/关闭天气预报" />
+                    <MenuItem Command="{Binding WindowSer.GetReport}" Header="打开/关闭天气预报" />
                     <MenuItem Command="{Binding WindowSer.GetMatters}" Header="打开/关闭待办事项" />
                     <MenuItem Command="{Binding WindowSer.GetMemo}" Header="打开/关闭备忘录" />
-                    <MenuItem Command="{Binding WindowSer.GetMusicPlayer}"
-                              CommandParameter="MainWindow"
-                              Header="打开/关闭音乐播放器" />
+                    <MenuItem Command="{Binding WindowSer.GetMusicPlayer}" Header="打开/关闭音乐播放器" />
                 </ContextMenu>
             </Image.ContextMenu>
         </Image>

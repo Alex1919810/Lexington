@@ -50,7 +50,7 @@ namespace Lexington
 
         public static SemaphoreSlim MatterSemaphore = new SemaphoreSlim(0);
 
-        public static ObservableCollection<Music> MusicsList = new ObservableCollection<Music>();
+        public static List<Music> MusicsList = new List<Music>();
 
 
 

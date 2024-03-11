@@ -2,7 +2,6 @@
 using Lexington.Command;
 using Lexington.Model;
 using Lexington.Service;
-using Lexington.Singleton;
 using Lexington.Tools;
 using Lexington.View;
 using NAudio.Wave;
@@ -128,9 +127,6 @@ namespace Lexington.ViewModel
 
         public ICommand ToLastMusic { get; set; }
 
-        public ICommand OpenMusicList { get; set; }
-
-
 
 
         public MusicPlayerViewModel(MusicPlayerWindow musicPlayerWindow) : base(musicPlayerWindow)
@@ -155,8 +151,6 @@ namespace Lexington.ViewModel
             VolumeValueChange = new RelayCommand<object>(param => ValueChangedVolume());
             ToNextMusic = new RelayCommand<object>(param=>NextMusic());
             ToLastMusic = new RelayCommand<object>(param => LastMusic());
-            OpenMusicList = new RelayCommand<object>(param => MusicListOpen());
-
         }
 
         private void InitializeData()
@@ -242,7 +236,7 @@ namespace Lexington.ViewModel
             if (!IsSlider)
             {
                 Music.MusicProcess = M_AudioFileReader.CurrentTime.TotalSeconds;
-                if ((int)M_AudioFileReader.CurrentTime.TotalSeconds >= (int)M_AudioFileReader.TotalTime.TotalSeconds)
+                if (M_AudioFileReader.CurrentTime.TotalSeconds >= M_AudioFileReader.TotalTime.TotalSeconds)
                 {
                     MusicStop();
                 }
@@ -307,9 +301,8 @@ namespace Lexington.ViewModel
 
         private void StopAndDispose()
         {
-            MusicStop();
             M_WaveOutEvent.Stop();
-            M_WaveOutEvent.Dispose();
+            //M_WaveOutEvent.Dispose();
 
         }
 
@@ -319,26 +312,11 @@ namespace Lexington.ViewModel
             Music = GlobalValue.MusicsList[M_MusicIndex];
             M_AudioFileReader = new AudioFileReader(Music.MusicPath);
             M_WaveOutEvent.Init(M_AudioFileReader);
-            M_WaveOutEvent.Play();
             MusicPlay();
+            M_WaveOutEvent.Play();
         }
 
-        private void MusicListOpen()
-        {
-            WindowManager.Instance.OpenAndCloseWindow<MusicListWindow>(typeof(MusicPlayerWindow),0,100);
-            var MusicList = WindowManager.Instance.GetWindow<MusicListWindow>();
-            if (MusicList != null)
-            {
-                (MusicList.DataContext as MusicListViewModel).SwitchMusicHandler += SwitchMusic;
-            }
-        }
 
-        private void SwitchMusic(int index)
-        {
-            StopAndDispose();
-            M_MusicIndex = index;
-            ReInitAndStart();
-        }
 
 
     }
