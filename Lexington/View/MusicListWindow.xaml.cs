@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Lexington.Singleton;
+using Lexington.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,15 @@ namespace Lexington.View
     /// </summary>
     public partial class MusicListWindow : Window
     {
+
         public MusicListWindow()
         {
+            this.Owner = WindowManager.Instance.GetWindow<MusicPlayerWindow>();
             InitializeComponent();
+            DataContext = new ViewModel.MusicListViewModel(this);
+
         }
+
+      
     }
 }

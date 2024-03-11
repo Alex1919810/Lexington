@@ -1,5 +1,6 @@
 ﻿using Lexington.Model;
 using NAudio.Wave;
+using System.Collections.ObjectModel;
 using System.IO;
 
 namespace Lexington.Tools
@@ -107,7 +108,7 @@ namespace Lexington.Tools
             {
                 // 获取目录下的所有文件路径
                 string[] files = Directory.GetFiles(path);
-
+                ObservableCollection <Music>  musics = new ObservableCollection<Music>();
                 // 遍历文件路径，并获取文件名
                 foreach (string filePath in files)
                 {
@@ -116,8 +117,9 @@ namespace Lexington.Tools
                     Console.WriteLine(fileName);
                     AudioFileReader audioFileReader = new AudioFileReader(filePath);
                     Music music = new Music(fileName,audioFileReader.TotalTime.TotalSeconds,filePath);
-                    GlobalValue.MusicsList.Add(music);
+                    musics.Add(music);
                 }
+                GlobalValue.MusicsList = musics;
             }
         }
     }

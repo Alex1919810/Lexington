@@ -52,10 +52,38 @@ namespace Lexington.Singleton
             return window;
         }
 
-        public void OpenAndCloseWindow<T>(Type FatherWindowType = null,double X = 0,double Y=0) where T : Window, new()
+        public void OpenAndCloseWindow<T>(string param) where T : Window, new()
         {
+            Type FatherWindowType = null; double X = 0; double Y = 0;
+
             var window = GetWindow<T>();
             if(window == null)
+            {
+                if (param != null)
+                {
+                    ParseParam(param, ref FatherWindowType, ref X, ref Y);
+                }
+                Type windowType = typeof(T);
+                M_Windows[windowType] = new T();
+                M_Windows[windowType].Closed += (sender, args) => M_Windows.Remove(windowType);
+                window = (T)M_Windows[windowType];
+                if (FatherWindowType != null && M_Windows.ContainsKey(FatherWindowType))
+                {
+                    SetNewWindowPosition(M_Windows[FatherWindowType], window, X, Y);
+                }
+                window.Show();
+                window.Activate();
+            }
+            else
+            {
+                window.Close();
+            }
+        }
+
+        public void OpenAndCloseWindow<T>(Type FatherWindowType=null,double X=0.0, double Y=0.0) where T : Window, new()
+        {
+            var window = GetWindow<T>();
+            if (window == null)
             {
                 Type windowType = typeof(T);
                 M_Windows[windowType] = new T();
@@ -90,6 +118,22 @@ namespace Lexington.Singleton
             else
             {
                 return M_Windows[type].Visibility == Visibility.Visible;
+            }
+        }
+
+        private void ParseParam(string param,ref Type FatherWindowType ,ref double X ,ref double Y )
+        {
+            string[] s = param.Split(',');
+            for (int i = 0; i < s.Count(); i++)
+            {
+                string t = s[i];
+                if (i == 0)
+                {
+                    t = "Lexington.View." + t;
+                    FatherWindowType = Type.GetType(t);
+                }
+                else if (i == 1) X = Convert.ToDouble(t);
+                else if (i == 2) Y = Convert.ToDouble(t);
             }
         }
 
