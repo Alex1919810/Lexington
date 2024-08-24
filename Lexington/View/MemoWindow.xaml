@@ -8,7 +8,7 @@
         Title="备忘录"
         Width="230"
         Height="200"
-        d:DataContext="{d:DesignInstance Type=viewmodel:MemoViewWindow}"
+        d:DataContext="{d:DesignInstance Type=viewmodel:MemoViewModel}"
         Closing="Window_Closing"
         Topmost="True"
         WindowStyle="SingleBorderWindow"
