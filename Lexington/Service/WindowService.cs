@@ -15,6 +15,8 @@ namespace Lexington.Service
 
         public ICommand GetMusicList { get; private set; }
 
+        public ICommand GetCalender { get; private set; }
+
 
         public ICommand CloseWindow { get; private set; }
 
@@ -26,7 +28,7 @@ namespace Lexington.Service
             GetMemo = new RelayCommand<string>(param => WindowManager.Instance.OpenAndCloseWindow<MemoWindow>(param));
             GetMusicPlayer = new RelayCommand<string>(param => WindowManager.Instance.OpenAndCloseWindow<MusicPlayerWindow>(param));
             GetMusicList = new RelayCommand<string>(param => WindowManager.Instance.OpenAndCloseWindow<MusicListWindow>(param));
-
+            GetCalender = new RelayCommand<string>(param => WindowManager.Instance.OpenAndCloseWindow<CalendarWindow>(param));
 
             CloseWindow = new RelayCommand<string>(param=>WindowManager.Instance.SetWindowClose(param));
         }

@@ -23,5 +23,20 @@ namespace Lexington.View
         {
             InitializeComponent();
         }
+
+        private void Calendar_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void OvertimeTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void AddOvertimeRecord(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

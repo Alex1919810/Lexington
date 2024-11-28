@@ -48,6 +48,7 @@
                     <MenuItem Command="{Binding WindowSer.GetMusicPlayer}"
                               CommandParameter="MainWindow"
                               Header="打开/关闭音乐播放器" />
+                    <MenuItem Command="{Binding WindowSer.GetCalender}" Header="打开/关闭加班记录" />
                 </ContextMenu>
             </Image.ContextMenu>
         </Image>
