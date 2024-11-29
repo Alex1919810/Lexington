@@ -80,6 +80,7 @@ namespace Lexington.ViewModel
             InitData();
             InitCommand();
             StartTask();
+            OpenWindows();
         }
 
         private void InitService()
@@ -108,7 +109,10 @@ namespace Lexington.ViewModel
             Task.Run(() => DisPlayMes());
         }
 
-
+        private void OpenWindows()
+        {
+            WindowManager.Instance.OpenAndCloseWindow<InputWindow>(typeof(MainWindow), 0, 200);
+        }
 
 
         public void DisplayText(int DialogState = 0)
