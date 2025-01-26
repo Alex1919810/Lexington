@@ -213,7 +213,7 @@ namespace Lexington.Tools
             string pageHtml = string.Empty;
             try
             {
-                using (WebClient MyWebClient = new WebClient())
+                using (WebClientPro MyWebClient = new(2000))
                 {
                     Encoding encode = Encoding.GetEncoding(encoding);
                     MyWebClient.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.84 Safari/537.36");

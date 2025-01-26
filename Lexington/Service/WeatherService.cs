@@ -21,6 +21,7 @@ namespace Lexington.Service
             //var data = search.MemorySearch(GlobalValue.m_IP);
             //string[] s = data.Region.Split('|');
             //City = s[3] == "0" ? string.Empty : s[3].Replace("市", "");
+            if (GlobalValue.m_IP == String.Empty) return;
             var ipinfo = IpTool.Search(GlobalValue.m_IP);
             City = ipinfo.City == string.Empty ? string.Empty : ipinfo.City;
 
@@ -50,9 +51,11 @@ namespace Lexington.Service
             {
                 string para = "theCityCode=" + City + "&theUserID= ";
                 we = HttpRequest.SendGet("http://ws.webxml.com.cn/WebServices/WeatherWS.asmx/getWeather", para);
+                if (we == String.Empty) return;
                 FilesTool.SaveWeather(we);
 
             }
+            if (we == String.Empty) return;
             Notes = FilesTool.ParseWeather(we);
             if (Notes.Count == 1)
             {

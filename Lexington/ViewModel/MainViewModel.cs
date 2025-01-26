@@ -111,7 +111,7 @@ namespace Lexington.ViewModel
 
         private void OpenWindows()
         {
-            WindowManager.Instance.OpenAndCloseWindow<InputWindow>(typeof(MainWindow), 0, 200);
+            //WindowManager.Instance.OpenAndCloseWindow<InputWindow>(typeof(MainWindow), 0, 200);
         }
 
 

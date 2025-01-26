@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 
+
 namespace Lexington.ViewModel
 {
     internal class MusicListViewModel : BaseViewModel<MusicListWindow>

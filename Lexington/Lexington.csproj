@@ -185,6 +185,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LexingtonCustomControlLibrary\LexingtonCustomControlLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Resource\Images\Icon\Normal.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

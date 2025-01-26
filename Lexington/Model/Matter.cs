@@ -1,4 +1,4 @@
-﻿using Lexington.BaseClass;
+﻿using LexingtonCustomControlLibrary;
 
 namespace Lexington.Model
 {
