@@ -1,4 +1,4 @@
-﻿using LexingtonCustomControlLibrary;
+﻿using LexingtonCustomControlLibrary.Notify;
 using Lexington.Command;
 using Lexington.Model;
 using Lexington.Tools;

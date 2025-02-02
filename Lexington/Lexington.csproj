@@ -82,6 +82,9 @@
     <None Update="Resource\Images\Button\Play.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Resource\Images\Window\background_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resource\Images\Window\OvO.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

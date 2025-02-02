@@ -7,4 +7,18 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="ChatInput\background_1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="ChatInput\background_1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resource\Images\Window\background_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,4 @@
-﻿using LexingtonCustomControlLibrary;
+﻿using LexingtonCustomControlLibrary.Notify;
 using Lexington.View;
 using System.Windows;
 

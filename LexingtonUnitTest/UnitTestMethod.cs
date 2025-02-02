@@ -5,7 +5,7 @@ using System.Reflection;
 namespace LexingtonUnitTest
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTestMethod
     {
 
         [TestMethod]

@@ -1,29 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LexingtonCustomControlLibrary.ChatInput
 {
-    /// <summary>
-    /// ChatInput.xaml 的交互逻辑
-    /// </summary>
     public partial class ChatInput : UserControl
     {
         public ChatInput()
         {
             InitializeComponent();
-            DataContext = new ChatInputViewModel();
+        }
+
+        // 在按下回车键时发送消息
+        private void MessageTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string message = MessageTextBox.Text;
+                if (!string.IsNullOrEmpty(message))
+                {
+                    // 这里你可以根据需要处理发送的消息
+                    MessageBox.Show($"Message sent: {message}");
+                    MessageTextBox.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a message.");
+                }
+
+                // 防止回车导致换行
+                e.Handled = true;
+            }
         }
     }
 }

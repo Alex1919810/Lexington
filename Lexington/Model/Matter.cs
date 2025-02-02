@@ -1,4 +1,4 @@
-﻿using LexingtonCustomControlLibrary;
+﻿using LexingtonCustomControlLibrary.Notify;
 
 namespace Lexington.Model
 {

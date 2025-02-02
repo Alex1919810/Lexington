@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace LexingtonCustomControlLibrary
+namespace LexingtonCustomControlLibrary.Notify
 {
     public class NotifyPropertyChanged : INotifyPropertyChanged
     {
